@@ -18,13 +18,9 @@ import {
   selectError,
 } from '../tv-series-store/tv-series.selectors';
 import * as tvShowActions from '../tv-series-store/tv-series.actions';
-import { TvSeriesModule } from '../tv-series.module';
-import { SharedModule } from '../../shared/shared.module';
 
 @Component({
   selector: 'web-mobile-tp-movies-tv-series-list',
-  standalone: true,
-  imports: [CommonModule, TvSeriesModule, SharedModule],
   templateUrl: './tv-series-list.component.html',
   styleUrls: ['./tv-series-list.component.scss'],
 })
