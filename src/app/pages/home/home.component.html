@@ -1,1 +1,11 @@
-<h1>Welcome! Hope you find the best movie for tonight.</h1>
+<div class="p-4">
+    <h1>Welcome! Hope you find the best movie for tonight.</h1>
+
+    <ul>
+        <li *ngFor="let favori of listFavoris">
+            {{ favori.title }}
+        </li>
+    </ul>
+
+    <button (click)="getFavorites()">Favoris</button>
+</div>

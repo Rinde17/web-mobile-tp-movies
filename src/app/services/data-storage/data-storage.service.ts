@@ -64,4 +64,28 @@ export class DataStorageService {
       .then((success) => callback())
       .catch((error) => callback(error));
   }
+
+  getFavorites(userId: string) {
+    // const listFavorites = this.angularFirestore
+    //   .collection(`Lists`)
+    //   .doc(`${userId}`)
+    //   .collection('favorite')
+    //   .get();
+
+    const listFavorites = [];
+    this.angularFirestore
+      .collection(`Lists/${userId}/favorite`)
+      .get()
+      .toPromise()
+      .then((querySnapshot) => {
+        querySnapshot.docs.forEach((doc) => {
+          listFavorites.push(doc.data());
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    return listFavorites;
+  }
 }
