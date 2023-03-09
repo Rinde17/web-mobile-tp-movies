@@ -1,0 +1,17 @@
+<div class="card" (click)="redirect()">
+    <img
+            class="card-img-top"
+            src="https://image.tmdb.org/t/p/w235_and_h235_face/{{
+      person.profile_path
+    }}"
+            alt="{{ person.name }}"
+    />
+    <div class="card-body">
+        <h5 class="card-title font-weight-bold">
+            {{ person.name }}
+        </h5>
+        <p class="card-text text-muted">
+            {{ formattedKnownFor() }}
+        </p>
+    </div>
+</div>

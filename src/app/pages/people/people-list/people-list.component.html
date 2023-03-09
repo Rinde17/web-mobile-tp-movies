@@ -1,0 +1,11 @@
+<div class="container">
+    <h1 class="mt-3">Acteurs populaires</h1>
+    <div class="form-group">
+        <input class="form-control" placeholder="Rechercher..." [(ngModel)]="searchText" />
+    </div>
+    <div class="container-fluid justify-content-center people-list">
+        <web-mobile-tp-movies-people-list-item *ngFor="let person of people$ | async | searchTextFilter: searchText: 'name'"
+                              [person]="person">
+        </web-mobile-tp-movies-people-list-item>
+    </div>
+</div>

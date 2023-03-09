@@ -1,0 +1,16 @@
+<div class="container">
+    <h1>Popular TV Shows</h1>
+    <div class="form-group">
+        <input class="form-control" placeholder="search here..." [(ngModel)]="searchText" />
+    </div>
+    <div class="d-flex flex-row">
+        <web-mobile-tp-movies-app-filters (genreChanged)="onGenreChanged($event)" (yearsChanged)="onYearChanged($event)"
+                     (sortByChanged)="onSortByChanged($event)">
+        </web-mobile-tp-movies-app-filters>
+        <div class="container-fluid tv-series-list">
+            <web-mobile-tp-movies-tv-series-list-item *ngFor="let tvshow of tvseries$ | async | searchTextFilter: searchText: 'name'"
+                                     [tvshow]="tvshow">
+            </web-mobile-tp-movies-tv-series-list-item>
+        </div>
+    </div>
+</div>

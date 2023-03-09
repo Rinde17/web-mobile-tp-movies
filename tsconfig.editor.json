@@ -2,6 +2,8 @@
   "extends": "./tsconfig.json",
   "include": ["src/**/*.ts"],
   "compilerOptions": {
+    "experimentalDecorators": true,
+    "experimentalDecorators": true,
     "types": ["jest", "node"]
   }
 }

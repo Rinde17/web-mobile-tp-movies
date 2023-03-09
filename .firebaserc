@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "web-mobile-tp-movies": {
+      "hosting": {
+        "web-mobile-tp-movies": [
+          "web-mobile-tp-movies"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "web-mobile-tp-movies"
+  }
+}
