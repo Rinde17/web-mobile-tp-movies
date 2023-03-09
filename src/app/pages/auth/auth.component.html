@@ -3,10 +3,10 @@
         <div class="card-header">
             <div class="btn-group d-flex">
                 <label class="btn btn-primary flex-grow-1" [(ngModel)]="authSwitch" btnRadio="login" role="button">
-                    Log In
+                    Connexion
                 </label>
                 <label class="btn btn-primary flex-grow-1" [(ngModel)]="authSwitch" btnRadio="register" role="button">
-                    Register
+                    Inscription
                 </label>
             </div>
         </div>
@@ -22,18 +22,18 @@
               loginForm.get('email').hasError('required') &&
               loginForm.get('email').dirty
             ">
-                        E-mail address is required!
+                        E-mail requise!
                     </div>
                     <div class="invalid-feedback d-block" *ngIf="
               loginForm.get('email').hasError('email') &&
               loginForm.get('email').dirty
             ">
-                        Please enter a valid e-mail address!
+                        Veuillez entrer une adresse E-mail valide !
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">Mot de passe</label>
                     <input type="password" id="password" class="form-control" formControlName="password" [ngClass]="{
               'is-invalid':
                 !loginForm.get('password').valid &&
@@ -43,17 +43,17 @@
               loginForm.get('password').hasError('required') &&
               loginForm.get('password').dirty
             ">
-                        Password is required!
+                        Le mot de passe est requis !
                     </div>
                     <div class="invalid-feedback d-block" *ngIf="
               loginForm.get('password').hasError('minlength') &&
               loginForm.get('password').dirty
             ">
-                        Password must be minimum 6 symbols!
+                        Le mot de passe ne peut pas contenir moins de 6 caractères !
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success w-100" [disabled]="!loginForm.valid">
-                    Log In
+                    Connexion
                 </button>
             </form>
             <alert type="danger" *ngIf="loginFormError !== ''">
@@ -75,18 +75,18 @@
                 registerForm.get('email').hasError('required') &&
                 registerForm.get('email').dirty
               ">
-                            E-mail address is required!
+                            E-mail requise!
                         </div>
                         <div class="invalid-feedback d-block" *ngIf="
                 registerForm.get('email').hasError('email') &&
                 registerForm.get('email').dirty
               ">
-                            Please enter a valid e-mail address!
+                            Veuillez entrer une adresse E-mail valide !
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="register_password">Password</label>
+                        <label for="register_password">Mot de passe</label>
                         <input type="password" id="register_password" class="form-control" formControlName="password" [ngClass]="{
                 'is-invalid':
                   !registerForm.get('password').valid &&
@@ -96,17 +96,17 @@
                 registerForm.get('password').hasError('required') &&
                 registerForm.get('password').dirty
               ">
-                            Password is required!
+                            Le mot de passe est requis !
                         </div>
                         <div class="invalid-feedback d-block" *ngIf="
                 registerForm.get('password').hasError('minlength') &&
                 registerForm.get('password').dirty
               ">
-                            Password must be minimum 6 symbols!
+                            Le mot de passe ne peut pas contenir moins de 6 caractères !
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success w-100" [disabled]="!registerForm.valid">
-                        Register
+                        Inscription
                     </button>
                 </form>
                 <alert type="danger" *ngIf="registerFormError !== ''">

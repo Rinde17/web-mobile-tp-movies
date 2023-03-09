@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "public",
+    "public": "dist/web-mobile-tp-movies",
     "ignore": [
       "firebase.json",
       "**/.*",

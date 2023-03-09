@@ -13,18 +13,18 @@ import { IPersonDetails, IPerson } from 'src/app/interfaces/person';
 
 export const TMDB_SORTING_OPTIONS: ISelectOption[] = [
   {
-    label: 'Popularity Descending',
+    label: 'Du + populaire au -',
     value: 'popularity.desc',
   },
   {
-    label: 'Popularity Ascending',
+    label: 'Du - populaire au +',
     value: 'popularity.asc',
   },
 ];
 
 export const TMDB_GENRE_OPTIONS: ISelectOption[] = [
   {
-    label: 'All',
+    label: 'Tous',
     value: '',
   },
   {
@@ -32,7 +32,7 @@ export const TMDB_GENRE_OPTIONS: ISelectOption[] = [
     value: 28,
   },
   {
-    label: 'Adventure',
+    label: 'Aventure',
     value: 12,
   },
   {
@@ -42,7 +42,7 @@ export const TMDB_GENRE_OPTIONS: ISelectOption[] = [
 ];
 
 const generateYearsOptions = (): ISelectOption[] => {
-  const yearsOption: ISelectOption[] = [{ label: 'All', value: '' }];
+  const yearsOption: ISelectOption[] = [{ label: 'Toutes', value: '' }];
   for (let i: number = new Date().getFullYear(); i >= 1900; i--) {
     yearsOption.push({ label: i.toString(), value: i });
   }
@@ -66,7 +66,7 @@ export class TmdbService {
           .map((key) => key + '=' + params[key])
           .join('&')
       : '';
-    return `${this._BASE_URL}${endpoint}?api_key=${this._API_KEY}&${queryParams}language=fr-FR&region=FR`;
+    return `${this._BASE_URL}${endpoint}?api_key=${this._API_KEY}&${queryParams}&language=fr-FR&region=FR`;
   }
 
   discoverMovie(params: any): Observable<IDiscoverPageContent<IMovie>> {
