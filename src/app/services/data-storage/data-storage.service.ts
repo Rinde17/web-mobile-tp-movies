@@ -7,6 +7,7 @@ import { IMovie } from 'src/app/interfaces/movie';
 import { ITvSerie } from 'src/app/interfaces/tvseries';
 import { isMovieTypeGuard } from 'src/app/interfaces/person';
 import { IFirestoreMedia } from 'src/app/interfaces/firestore';
+import { data } from 'cypress/types/jquery';
 
 @Injectable({
   providedIn: 'root',
@@ -81,5 +82,12 @@ export class DataStorageService {
       });
 
     return listFavorites;
+  }
+
+  getInfos(userEmail: string) {
+    const infoProfile = this.angularFirestore
+      .doc(`Lists/${userEmail}`);
+
+    return infoProfile;
   }
 }
