@@ -75,6 +75,7 @@ export class DataStorageService {
       .then((querySnapshot) => {
         querySnapshot.docs.forEach((doc) => {
           listFavorites.push(doc.data());
+          console.log(listFavorites);
         });
       })
       .catch((err) => {
@@ -84,10 +85,30 @@ export class DataStorageService {
     return listFavorites;
   }
 
-  getInfos(userEmail: string) {
-    const infoProfile = this.angularFirestore
-      .doc(`Lists/${userEmail}`);
+  // getInfos(userEmail: string) {
+  //   const infosProfile = {
+  //     last_name: '',
+  //     first_name: '',
+  //   };
+  //   this.angularFirestore
+  //     .doc(`Lists/${userEmail}`)
+  //     .get()
+  //     .toPromise()
+  //     .then((querySnapshot) => {
+  //       // querySnapshot.docs.forEach((doc) => {
+  //       //   infosProfile.push(doc.data());
+  //       //   console.log(infosProfile);
+  //       // });
+  //       infosProfile.last_name = querySnapshot.get('last_name');
+  //       infosProfile.first_name = querySnapshot.get('first_name');
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  //   return infosProfile;
+  // }
 
-    return infoProfile;
+  getInfos(userEmail: string) {
+    return this.angularFirestore.firestore.doc(`Lists/${userEmail}`).get();
   }
 }
