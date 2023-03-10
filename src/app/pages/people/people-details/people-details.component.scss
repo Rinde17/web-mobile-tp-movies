@@ -1,0 +1,29 @@
+.profile-image{
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.known-for-list{
+  display: flex;
+  overflow-x: scroll;
+  >.known-for-item{
+    margin-right: 15px;
+    margin-bottom: 5px;
+    font-size: 13px;
+    > img{
+      border-radius: 8px;
+      width: 200px;
+      cursor: pointer;
+    }
+    >.media-title{
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      text-align: center;
+    }
+    &:last-of-type{
+      margin-right: 0;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+<div *ngIf="tvshow">
+    <div
+            class="header"
+            [style.background-image]="
+      'url(https://image.tmdb.org/t/p/w220_and_h330_face/' +
+      tvshow.backdrop_path +
+      ')'
+    "
+    >
+        <div class="custom-background">
+            <div class="container">
+                <div class="d-flex">
+                    <img
+                            src="https://image.tmdb.org/t/p/w220_and_h330_face/{{
+              tvshow.poster_path
+            }}"
+                            alt="{{ tvshow.name }}"
+                            appImgFallback
+                    />
+                    <div class="d-flex flex-column tvshow-details">
+                        <h1>{{ tvshow.name }} ({{ tvshow.first_air_date | date: "y" }})</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,2 +1,52 @@
-<web-mobile-tp-movies-nx-welcome></web-mobile-tp-movies-nx-welcome>
+<nav class="navbar navbar-expand-lg navbar-light navbar-dark bg-dark">
+
+    <a class="navbar-brand" routerLink="/">WebMobileTpMovies</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarNav"
+            (click)="isShown = !isShown" [attr.aria-expanded]="isShown">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav" [ngClass]="{ 'show': isShown }">
+        <div class="navbar-nav mr-auto">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/movies" routerLinkActive="active"
+                       [routerLinkActiveOptions]="{ exact: true }">Films</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/tv-series" routerLinkActive="active"
+                       [routerLinkActiveOptions]="{ exact: true }">Séries</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/people" routerLinkActive="active"
+                       [routerLinkActiveOptions]="{ exact: true }">Acteurs</a>
+                </li>
+            </ul>
+        </div>
+
+        <ul class="navbar-nav mr-0" *ngIf="!user">
+            <li class="nav-item mr-3">
+                <a class="nav-link btn text-white btn-danger btn-sm" (click)="logIn()">
+                    Connexion / Inscription
+                </a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav mr-0" *ngIf="user">
+            <li class="nav-item mr-3">
+                <img class="user-photo" src="{{user.photoURL}}" alt="">
+            </li>
+            <li class="nav-item mr-3">
+                <a class="nav-link text-white btn btn-warning btn-sm">
+                    {{user.email}}
+                </a>
+            </li>
+            <li class="nav-item mr-3">
+                <a class="nav-link text-white btn btn-danger btn-sm" (click)="logOut()">
+                    Déconnexion
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
 <router-outlet></router-outlet>

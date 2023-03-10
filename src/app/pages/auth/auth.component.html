@@ -1,0 +1,156 @@
+<div class="container justify-content-center d-flex align-items-center">
+    <div class="card mt-5 login-form">
+        <div class="card-header">
+            <div class="btn-group d-flex">
+                <label class="btn btn-primary flex-grow-1" [(ngModel)]="authSwitch" btnRadio="login" role="button">
+                    Connexion
+                </label>
+                <label class="btn btn-primary flex-grow-1" [(ngModel)]="authSwitch" btnRadio="register" role="button">
+                    Inscription
+                </label>
+            </div>
+        </div>
+        <div class="card-body" *ngIf="authSwitch === 'login'; else authSwitchRegister">
+            <form class="mb-3" [formGroup]="loginForm" (ngSubmit)="onSubmitLoginForm()">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" formControlName="email" [ngClass]="{
+              'is-invalid':
+                !loginForm.get('email').valid && loginForm.get('email').dirty
+            }" />
+                    <div class="invalid-feedback d-block" *ngIf="
+              loginForm.get('email').hasError('required') &&
+              loginForm.get('email').dirty
+            ">
+                        E-mail requise!
+                    </div>
+                    <div class="invalid-feedback d-block" *ngIf="
+              loginForm.get('email').hasError('email') &&
+              loginForm.get('email').dirty
+            ">
+                        Veuillez entrer une adresse E-mail valide !
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" class="form-control" formControlName="password" [ngClass]="{
+              'is-invalid':
+                !loginForm.get('password').valid &&
+                loginForm.get('password').dirty
+            }" />
+                    <div class="invalid-feedback d-block" *ngIf="
+              loginForm.get('password').hasError('required') &&
+              loginForm.get('password').dirty
+            ">
+                        Le mot de passe est requis !
+                    </div>
+                    <div class="invalid-feedback d-block" *ngIf="
+              loginForm.get('password').hasError('minlength') &&
+              loginForm.get('password').dirty
+            ">
+                        Le mot de passe ne peut pas contenir moins de 6 caractères !
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success w-100" [disabled]="!loginForm.valid">
+                    Connexion
+                </button>
+            </form>
+            <alert type="danger" *ngIf="loginFormError !== ''">
+                {{ loginFormError }}
+            </alert>
+        </div>
+
+        <ng-template #authSwitchRegister>
+            <div class="card-body">
+                <form class="mb-3" [formGroup]="registerForm" (ngSubmit)="onSubmitRegisterForm()">
+                    <div class="form-group">
+                        <label for="last_name">Nom</label>
+                        <input type="text" id="last_name" class="form-control" formControlName="last_name" [ngClass]="{
+                        'is_invalid':
+                                !registerForm.get('last_name').valid && registerForm.get('last_name').dirty
+                        }"/>
+                        <div class="invalid-feedback d-block" *ngIf="
+                                registerForm.get('last_name').hasError('required') && registerForm.get('last_name').dirty
+                            "
+                        >
+                            Nom requi !
+                        </div>
+                        <div class="invalid-feedback d-block" *ngIf="
+                registerForm.get('last_name').hasError('maxlength') &&
+                registerForm.get('last_name').dirty
+              ">
+                            200 caractère max !
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="first_name">Prénom</label>
+                        <input type="text" id="first_name" class="form-control" formControlName="first_name" [ngClass]="{
+                            'is_invalid':
+                                !registerForm.get('first_name').valid && registerForm.get('first_name').dirty
+                        }"/>
+                        <div class="invalid-feedback d-block" *ngIf="
+                                registerForm.get('first_name').hasError('required') && registerForm.get('first_name').dirty
+                            "
+                        >
+                            Prénom requi !
+                        </div>
+                        <div class="invalid-feedback d-block" *ngIf="
+                registerForm.get('first_name').hasError('maxlength') &&
+                registerForm.get('first_name').dirty
+              ">
+                            200 caractère max !
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="register_email">Email</label>
+                        <input type="email" id="register_email" class="form-control" formControlName="email" [ngClass]="{
+                'is-invalid':
+                  !registerForm.get('email').valid &&
+                  registerForm.get('email').dirty
+              }" />
+                        <div class="invalid-feedback d-block" *ngIf="
+                registerForm.get('email').hasError('required') &&
+                registerForm.get('email').dirty
+              ">
+                            E-mail requise!
+                        </div>
+                        <div class="invalid-feedback d-block" *ngIf="
+                registerForm.get('email').hasError('email') &&
+                registerForm.get('email').dirty
+              ">
+                            Veuillez entrer une adresse E-mail valide !
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="register_password">Mot de passe</label>
+                        <input type="password" id="register_password" class="form-control" formControlName="password" [ngClass]="{
+                'is-invalid':
+                  !registerForm.get('password').valid &&
+                  registerForm.get('password').dirty
+              }" />
+                        <div class="invalid-feedback d-block" *ngIf="
+                registerForm.get('password').hasError('required') &&
+                registerForm.get('password').dirty
+              ">
+                            Le mot de passe est requis !
+                        </div>
+                        <div class="invalid-feedback d-block" *ngIf="
+                registerForm.get('password').hasError('minlength') &&
+                registerForm.get('password').dirty
+              ">
+                            Le mot de passe ne peut pas contenir moins de 6 caractères !
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100" [disabled]="!registerForm.valid">
+                        Inscription
+                    </button>
+                </form>
+                <alert type="danger" *ngIf="registerFormError !== ''">
+                    {{ registerFormError }}
+                </alert>
+            </div>
+        </ng-template>
+    </div>
+</div>

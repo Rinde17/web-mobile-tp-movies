@@ -1,0 +1,27 @@
+<div *ngIf="movies">
+    <div
+            class="header"
+            [style.background-image]="
+      'url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/' +
+      movies.backdrop_path +
+      ')'
+    "
+    >
+        <div class="custom-background">
+            <div class="container d-flex">
+                <img
+                        src="https://image.tmdb.org/t/p/w220_and_h330_face/{{movies.poster_path}}"
+                        alt="{{ movies.title }}"
+                        appImgFallback
+                />
+                <div class="d-flex flex-column movie-details">
+                    <h1>{{ movies.title }} ({{ movies.release_date | date: "y" }})</h1>
+                    <h2> Note : {{ movies.vote_average }}</h2>
+                    <p> Overview : {{ movies.overview }}</p>
+                    <h2> Popularity : {{ movies.popularity }}</h2>
+                    <h2> Nombre de vote : {{ movies.vote_count }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

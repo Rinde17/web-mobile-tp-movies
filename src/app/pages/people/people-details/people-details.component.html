@@ -1,0 +1,39 @@
+<ng-template [ngIf]="person">
+    <div class="d-flex p-3">
+        <div class="col-3">
+            <img
+                    src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/{{
+          person.profile_path
+        }}"
+                    class="profile-image"
+            />
+        </div>
+        <div class="col-9">
+            <h1>{{ person.name }}</h1>
+            <div>
+                <h4>Biographie</h4>
+                <p>{{ person.biography }}</p>
+            </div>
+            <div>
+                <h4>Connu pour</h4>
+                <div class="known-for-list">
+                    <div
+                            class="known-for-item"
+                            *ngFor="let cast of credits.cast"
+                            (click)="redirectToMedia(cast.media_type, cast.id)"
+                    >
+                        <img
+                                src="https://image.tmdb.org/t/p/w300_and_h450_bestv2//{{
+                cast.poster_path
+              }}"
+                                appImgFallback
+                        />
+                        <div class="media-title">
+                            {{ cast.title }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

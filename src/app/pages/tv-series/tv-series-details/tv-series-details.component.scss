@@ -1,0 +1,19 @@
+.header{
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-bottom: 2px solid black;
+}
+
+.custom-background{
+  background-image: linear-gradient(to right,
+          rgba(12.94%, 14.90%, 22.75%, 1.00) 150px,
+          rgba(20.39%, 22.35%, 29.02%, 0.84) 100%);
+
+  padding: 30px 40px;
+}
+
+.tvshow-details{
+  padding: 20px;
+  color: blanchedalmond;
+}

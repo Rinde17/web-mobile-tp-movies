@@ -1,0 +1,28 @@
+<form [formGroup]="filterFormGroup">
+    <div class="row">
+        <div class="form-group col-12">
+            <label>Trier par</label>
+            <select class="form-control" formControlName="sortBy">
+                <option *ngFor="let option of filterSortByOptions" [ngValue]="option">{{
+                  option.label
+                    }}</option>
+            </select>
+        </div>
+        <div class="form-group col-12">
+            <label>Genre</label>
+            <select class="form-control" formControlName="genre">
+                <option *ngFor="let option of filterGenreOptions" [ngValue]="option">{{
+                  option.label
+                    }}</option>
+            </select>
+        </div>
+        <div class="form-group col-12">
+            <label>Année</label>
+            <select class="form-control" formControlName="year">
+                <option *ngFor="let option of filterYearsOptions" [ngValue]="option">{{
+                  option.label
+                    }}</option>
+            </select>
+        </div>
+    </div>
+</form>
