@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ITvSerie } from 'src/app/interfaces/tvseries';
 import { ActivatedRoute } from '@angular/router';
 import { TmdbService } from 'src/app/services/tmdb/tmdb.service';
@@ -12,6 +11,8 @@ import { TmdbService } from 'src/app/services/tmdb/tmdb.service';
 export class TvSeriesDetailsComponent {
   tvshow: ITvSerie;
   routeParameterId: number;
+  thenBlock: any;
+  elseBlock: any;
 
   constructor(
     private _activatedRoute: ActivatedRoute,

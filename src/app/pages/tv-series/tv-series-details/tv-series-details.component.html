@@ -8,19 +8,38 @@
     "
     >
         <div class="custom-background">
-            <div class="container">
-                <div class="d-flex">
-                    <img
-                            src="https://image.tmdb.org/t/p/w220_and_h330_face/{{
-              tvshow.poster_path
-            }}"
+            <div class="container d-flex">
+                    <img class="cover-image"
+                            src="https://image.tmdb.org/t/p/w220_and_h330_face/{{tvshow.poster_path}}"
                             alt="{{ tvshow.name }}"
                             appImgFallback
                     />
                     <div class="d-flex flex-column tvshow-details">
                         <h1>{{ tvshow.name }} ({{ tvshow.first_air_date | date: "y" }})</h1>
+                        <h3> Par :
+                            <span *ngFor="let user of tvshow.created_by; last as isLast">
+                                <span *ngIf="isLast === false"> {{user.name}},</span>
+                                <span *ngIf="isLast"> {{user.name}} </span>
+                            </span>
+                        </h3>
+                        <h2> Note : {{ tvshow.vote_average }} / 10 ({{ tvshow.vote_count }} votes)</h2>
+                        <h2>
+                            <span *ngIf="tvshow.number_of_seasons <= 1"> {{ tvshow.number_of_seasons }} saison, disponible sur : </span>
+                            <span *ngIf="tvshow.number_of_seasons > 1"> {{ tvshow.number_of_seasons }} saisons, disponibles sur : </span>
+                            <div *ngFor="let network of tvshow.networks; last as isLast">
+                                <span *ngIf="isLast === false">
+                                    {{network.name}}
+                                </span>
+
+                                <span *ngIf="isLast">
+                                    {{network.name}}
+                                </span>
+                            </div>
+                        </h2>
                     </div>
-                </div>
+            </div>
+            <div class="tvshow-details">
+                <p> Overview : {{ tvshow.overview }}</p>
             </div>
         </div>
     </div>
