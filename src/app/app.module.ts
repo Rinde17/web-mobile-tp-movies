@@ -16,9 +16,10 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AuthEffects } from './pages/auth/auth-store/auth.effects';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routes';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent, HomeComponent, ProfileComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
