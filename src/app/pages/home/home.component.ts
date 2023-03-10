@@ -15,6 +15,7 @@ import {
 } from '../movies/movie-store/movie.selectors';
 import { Subject } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import {getAuth} from "@angular/fire/auth";
 
 @Component({
   selector: 'web-mobile-tp-movies-home',
@@ -23,7 +24,6 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 })
 export class HomeComponent implements OnInit {
   listFavoris: any[];
-  currentUser: IUser;
   destroyed$: Subject<boolean> = new Subject<boolean>();
   constructor(
     private _dataStorageService: DataStorageService,
@@ -33,9 +33,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this._authService.userState
       .pipe(takeUntil(this.destroyed$))
-      .subscribe((user) => {
-        this.currentUser = user;
-        this.listFavoris = this._dataStorageService.getFavorites(user?.email);
+      .subscribe(() => {
+        const authUser = getAuth().currentUser;
+        this.listFavoris = this._dataStorageService.getFavorites(authUser?.uid);
       });
   }
 }
