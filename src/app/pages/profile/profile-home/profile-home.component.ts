@@ -3,7 +3,6 @@ import {Subject, takeUntil} from 'rxjs';
 import {DataStorageService} from 'src/app/services/data-storage/data-storage.service';
 import {AuthService} from 'src/app/services/auth/auth.service';
 import {getAuth} from '@angular/fire/auth';
-import {DocumentData} from '@angular/fire/compat/firestore';
 
 @Component({
     selector: 'web-mobile-tp-movies-profile-home',
@@ -28,4 +27,18 @@ export class ProfileHomeComponent implements OnInit {
                 this.infos = this._authService.getInfos(authUser?.email);
             });
     }
+    // this._authService.userState
+    //   .pipe(takeUntil(this.destroyed$))
+    //   .subscribe(() => {
+    //     const authUser = getAuth().currentUser;
+    //     this.infos = this._dataStorageService.getInfos(authUser?.email).snapshotChanges().pipe(
+    //       map(changes =>
+    //           changes.map(c =>
+    //               ({ first_name: c.payload.doc.data() })
+    //           )
+    //       )
+    //     ).subscribe();
+    //   });
+    //
+    //   console.log(this.infos);
 }

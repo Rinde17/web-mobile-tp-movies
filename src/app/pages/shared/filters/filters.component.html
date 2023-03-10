@@ -1,6 +1,6 @@
 <form [formGroup]="filterFormGroup">
-    <div class="row">
-        <div class="form-group col-12">
+    <div class="d-flex flex-wrap justify-content-center">
+        <div class="mr-3">
             <label>Trier par</label>
             <select class="form-control" formControlName="sortBy">
                 <option *ngFor="let option of filterSortByOptions" [ngValue]="option">{{
@@ -8,7 +8,7 @@
                     }}</option>
             </select>
         </div>
-        <div class="form-group col-12">
+        <div class="mr-3">
             <label>Genre</label>
             <select class="form-control" formControlName="genre">
                 <option *ngFor="let option of filterGenreOptions" [ngValue]="option">{{
@@ -16,7 +16,7 @@
                     }}</option>
             </select>
         </div>
-        <div class="form-group col-12">
+        <div>
             <label>Année</label>
             <select class="form-control" formControlName="year">
                 <option *ngFor="let option of filterYearsOptions" [ngValue]="option">{{
