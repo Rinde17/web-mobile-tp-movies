@@ -101,4 +101,22 @@ export class AuthService {
   //       )
   //   );
   // }
+  getInfos(userEmail: string) {
+    const infosProfile = {
+      last_name: '',
+      first_name: '',
+    };
+    this.angularFirestore
+      .doc(`Lists/${userEmail}`)
+      .get()
+      .toPromise()
+      .then((querySnapshot) => {
+        infosProfile.last_name = querySnapshot.get('last_name');
+        infosProfile.first_name = querySnapshot.get('first_name');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    return infosProfile;
+  }
 }
