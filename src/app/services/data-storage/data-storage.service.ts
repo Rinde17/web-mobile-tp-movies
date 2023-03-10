@@ -7,6 +7,7 @@ import { IMovie } from 'src/app/interfaces/movie';
 import { ITvSerie } from 'src/app/interfaces/tvseries';
 import { isMovieTypeGuard } from 'src/app/interfaces/person';
 import { IFirestoreMedia } from 'src/app/interfaces/firestore';
+import { data } from 'cypress/types/jquery';
 
 @Injectable({
   providedIn: 'root',
@@ -74,6 +75,7 @@ export class DataStorageService {
       .then((querySnapshot) => {
         querySnapshot.docs.forEach((doc) => {
           listFavorites.push(doc.data());
+          console.log(listFavorites);
         });
       })
       .catch((err) => {
@@ -81,5 +83,32 @@ export class DataStorageService {
       });
 
     return listFavorites;
+  }
+
+  // getInfos(userEmail: string) {
+  //   const infosProfile = {
+  //     last_name: '',
+  //     first_name: '',
+  //   };
+  //   this.angularFirestore
+  //     .doc(`Lists/${userEmail}`)
+  //     .get()
+  //     .toPromise()
+  //     .then((querySnapshot) => {
+  //       // querySnapshot.docs.forEach((doc) => {
+  //       //   infosProfile.push(doc.data());
+  //       //   console.log(infosProfile);
+  //       // });
+  //       infosProfile.last_name = querySnapshot.get('last_name');
+  //       infosProfile.first_name = querySnapshot.get('first_name');
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  //   return infosProfile;
+  // }
+
+  getInfos(userEmail: string) {
+    return this.angularFirestore.firestore.doc(`Lists/${userEmail}`).get();
   }
 }
