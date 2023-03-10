@@ -88,7 +88,7 @@ export class MovieListComponent implements OnInit {
     console.log(this.currentUser.uid);
     this._dataStorageService.addMediaToWatchlist(
       movie,
-      this.currentUser.uid,
+      this.currentUser.email,
       (error) => {
         if (error) {
           console.log(error);
@@ -103,7 +103,7 @@ export class MovieListComponent implements OnInit {
     console.log(this.currentUser.uid);
     this._dataStorageService.addMediaToFavorite(
       movie,
-      this.currentUser.uid,
+      this.currentUser.email,
       (error) => {
         if (error) {
           console.log(error);

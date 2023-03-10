@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { BehaviorSubject } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { IFirestoreMedia } from '../../interfaces/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -45,18 +46,41 @@ export class AuthService {
   }
 
   registerWithEmailAndPassword(
-    credentials: { email: string; password: string },
+    credentials: {
+      last_name: string;
+      first_name: string;
+      email: string;
+      password: string;
+    },
     callback: (error?: any) => void
   ) {
+    this.addToFirestore(
+      credentials.email,
+      credentials.last_name,
+      credentials.first_name
+    );
     return this._angularFireAuth
       .createUserWithEmailAndPassword(credentials.email, credentials.password)
       .then((response) => {
-        console.log(credentials);
         callback();
       })
       .catch((error) => {
         callback(error);
       });
+  }
+
+  addToFirestore(email, last_name, first_name) {
+    const data = {
+      last_name: last_name,
+      first_name: first_name,
+    };
+
+    this.angularFirestore
+      .collection('Lists')
+      .doc(`${email}`)
+      .set(data)
+      .then((success) => console.log(success))
+      .catch((err) => console.log(err));
   }
 
   // private updateUserInfo({ uid, displayName, email, photoURL }: firebase.User) {

@@ -21,7 +21,7 @@ export class DataStorageService {
 
   addMediaToWatchlist(
     media: IMovie | ITvSerie,
-    userId: string,
+    userEmail: string,
     callback: (error?: string) => void
   ): void {
     const mediaDetails: IFirestoreMedia = {
@@ -34,7 +34,7 @@ export class DataStorageService {
     };
 
     this.angularFirestore
-      .doc(`Lists/${userId}`)
+      .doc(`Lists/${userEmail}`)
       .collection<IFirestoreMedia[]>('watchlist')
       .doc<IFirestoreMedia>(`${media.id}`)
       .set(mediaDetails)
@@ -44,7 +44,7 @@ export class DataStorageService {
 
   addMediaToFavorite(
     media: IMovie | ITvSerie,
-    userId: string,
+    userEmail: string,
     callback: (error?: string) => void
   ): void {
     const mediaDetails: IFirestoreMedia = {
@@ -57,7 +57,7 @@ export class DataStorageService {
     };
 
     this.angularFirestore
-      .doc(`Lists/${userId}`)
+      .doc(`Lists/${userEmail}`)
       .collection<IFirestoreMedia[]>('favorite')
       .doc<IFirestoreMedia>(`${media.id}`)
       .set(mediaDetails)
@@ -65,10 +65,10 @@ export class DataStorageService {
       .catch((error) => callback(error));
   }
 
-  getFavorites(userId: string) {
+  getFavorites(userEmail: string) {
     const listFavorites = [];
     this.angularFirestore
-      .collection(`Lists/${userId}/favorite`)
+      .collection(`Lists/${userEmail}/favorite`)
       .get()
       .toPromise()
       .then((querySnapshot) => {

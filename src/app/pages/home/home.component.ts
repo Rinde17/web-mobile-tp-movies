@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
       .pipe(takeUntil(this.destroyed$))
       .subscribe((user) => {
         this.currentUser = user;
-        this.listFavoris = this._dataStorageService.getFavorites(user?.uid);
+        this.listFavoris = this._dataStorageService.getFavorites(user?.email);
       });
   }
 }

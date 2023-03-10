@@ -67,6 +67,14 @@ export class AuthComponent implements OnInit {
     });
 
     this.registerForm = new FormGroup({
+      last_name: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(200),
+      ]),
+      first_name: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(200),
+      ]),
       password: new FormControl('', [
         Validators.required,
         Validators.minLength(6),
