@@ -66,12 +66,6 @@ export class DataStorageService {
   }
 
   getFavorites(userId: string) {
-    // const listFavorites = this.angularFirestore
-    //   .collection(`Lists`)
-    //   .doc(`${userId}`)
-    //   .collection('favorite')
-    //   .get();
-
     const listFavorites = [];
     this.angularFirestore
       .collection(`Lists/${userId}/favorite`)
