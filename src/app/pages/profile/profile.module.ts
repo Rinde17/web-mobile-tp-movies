@@ -6,11 +6,12 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { ProfileHomeComponent } from './profile-home/profile-home.component';
 import { ProfileRoutingModule } from './profile-routing.module';
+import { ProfileFavoritesComponent } from './profile-favorites/profile-favorites.component';
 
 
 @NgModule({
   declarations: [
-    ProfileHomeComponent
+    ProfileHomeComponent, ProfileFavoritesComponent
   ],
   imports: [
     CommonModule,

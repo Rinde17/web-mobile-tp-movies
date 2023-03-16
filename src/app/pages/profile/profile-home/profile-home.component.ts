@@ -14,7 +14,6 @@ export class ProfileHomeComponent implements OnInit {
   destroyed$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
-    private _dataStorageService: DataStorageService,
     private _authService: AuthService
   ) {}
   ngOnInit(): void {
