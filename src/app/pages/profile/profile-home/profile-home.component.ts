@@ -26,4 +26,3 @@ export class ProfileHomeComponent implements OnInit {
       });
   }
 }
-//

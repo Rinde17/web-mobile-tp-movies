@@ -84,6 +84,4 @@ export class DataStorageService {
       });
     return listFavorites;
   }
-
-  //
 }
