@@ -41,6 +41,10 @@ export class AppComponent implements OnInit {
     this._router.navigate(['/auth']);
   }
 
+  profile(): void {
+    this._router.navigate(['/profile']);
+  }
+
   ngOnDestroy(): void {
     this.destroyed$.next(true);
     this.destroyed$.complete();

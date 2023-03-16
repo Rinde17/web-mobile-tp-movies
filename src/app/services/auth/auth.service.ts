@@ -54,14 +54,15 @@ export class AuthService {
     },
     callback: (error?: any) => void
   ) {
-    this.addToFirestore(
-      credentials.email,
-      credentials.last_name,
-      credentials.first_name
-    );
     return this._angularFireAuth
       .createUserWithEmailAndPassword(credentials.email, credentials.password)
       .then((response) => {
+        this.addToFirestore(
+          credentials.email,
+          credentials.last_name,
+          credentials.first_name,
+          response.user.uid
+        );
         callback();
       })
       .catch((error) => {
@@ -69,14 +70,16 @@ export class AuthService {
       });
   }
 
-  addToFirestore(email, last_name, first_name) {
+  addToFirestore(email, last_name, first_name, uid) {
     const data = {
+      email: email,
       last_name: last_name,
       first_name: first_name,
+      uid: uid,
     };
 
     this.angularFirestore
-      .collection('Lists')
+      .collection('Users')
       .doc(`${email}`)
       .set(data)
       .then((success) => console.log(success))
@@ -101,4 +104,26 @@ export class AuthService {
   //       )
   //   );
   // }
+  getInfos(userEmail: string) {
+    const infosProfile = {
+      email: '',
+      last_name: '',
+      first_name: '',
+      uid: '',
+    };
+    this.angularFirestore
+      .doc(`Users/${userEmail}`)
+      .get()
+      .toPromise()
+      .then((querySnapshot) => {
+        infosProfile.email = querySnapshot.get('email');
+        infosProfile.last_name = querySnapshot.get('last_name');
+        infosProfile.first_name = querySnapshot.get('first_name');
+        infosProfile.uid = querySnapshot.get('uid');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    return infosProfile;
+  }
 }

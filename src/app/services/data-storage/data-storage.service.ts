@@ -7,6 +7,8 @@ import { IMovie } from 'src/app/interfaces/movie';
 import { ITvSerie } from 'src/app/interfaces/tvseries';
 import { isMovieTypeGuard } from 'src/app/interfaces/person';
 import { IFirestoreMedia } from 'src/app/interfaces/firestore';
+import 'firebase/firestore';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +18,7 @@ export class DataStorageService {
     private httpClient: HttpClient,
     private authService: AuthService,
     private angularFireAuth: AngularFireAuth,
+    private db: AngularFireDatabase,
     private angularFirestore: AngularFirestore
   ) {}
 
@@ -34,7 +37,7 @@ export class DataStorageService {
     };
 
     this.angularFirestore
-      .doc(`Lists/${userEmail}`)
+      .doc(`Users/${userEmail}`)
       .collection<IFirestoreMedia[]>('watchlist')
       .doc<IFirestoreMedia>(`${media.id}`)
       .set(mediaDetails)
@@ -57,7 +60,7 @@ export class DataStorageService {
     };
 
     this.angularFirestore
-      .doc(`Lists/${userEmail}`)
+      .doc(`Users/${userEmail}`)
       .collection<IFirestoreMedia[]>('favorite')
       .doc<IFirestoreMedia>(`${media.id}`)
       .set(mediaDetails)
@@ -68,7 +71,7 @@ export class DataStorageService {
   getFavorites(userEmail: string) {
     const listFavorites = [];
     this.angularFirestore
-      .collection(`Lists/${userEmail}/favorite`)
+      .collection(`Users/${userEmail}/favorite`)
       .get()
       .toPromise()
       .then((querySnapshot) => {
@@ -79,7 +82,6 @@ export class DataStorageService {
       .catch((err) => {
         console.log(err);
       });
-
     return listFavorites;
   }
 }
