@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 import { ITvSerie } from 'src/app/interfaces/tvseries';
 import { ISelectOption } from 'src/app/interfaces/select-option';
 import { IPersonDetails, IPerson } from 'src/app/interfaces/person';
+import {ITvCredit} from "../../interfaces/tvcredits";
 
 export const TMDB_SORTING_OPTIONS: ISelectOption[] = [
   {
@@ -91,6 +92,12 @@ export class TmdbService {
   tvseries(id: number): Observable<ITvSerie> {
     return this.httpClient.get<ITvSerie>(
       `${this._BASE_URL}/tv/${id}?api_key=${this._API_KEY}`
+    );
+  }
+
+  tvcredits(id: number): Observable<ITvCredit> {
+    return this.httpClient.get<ITvCredit>(
+      `${this._BASE_URL}/tv/${id}/credits?api_key=${this._API_KEY}`
     );
   }
 

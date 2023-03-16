@@ -2,24 +2,27 @@
   width: 100%;
   background-size: cover;
   background-repeat: no-repeat;
-  border-bottom: 2px solid black;
-}
-
-.cover-image {
-  align-self: center;
-}
-
-.network-image {
-  width: 100%;
-  height: 100%;
 }
 
 .custom-background{
   background-image: linear-gradient(to right,
           rgba(12.94%, 14.90%, 22.75%, 1.00) 150px,
           rgba(20.39%, 22.35%, 29.02%, 0.84) 100%);
+}
 
-  padding: 20px 10px;
+.cover-image {
+  align-self: center;
+  max-height: 330px;
+  margin-left: 10px;
+}
+
+.actor-image {
+  //border: 2px solid blue;
+  align-self: center;
+  height: 260px;
+  max-width: 172px;
+  object-fit: cover;
+  border-radius: 25px 25px 0px 0px;
 }
 
 .tvshow-details{
@@ -27,6 +30,57 @@
   color: blanchedalmond;
 }
 
+.cast-title {
+  color: #4b4b4b;
+  font-weight: bold;
+  padding: 5px 10px;
+  margin: 0px;
+}
+
+.cast-slider {
+  //border: 2px solid green;
+  width: 100%;
+}
+
+.actor-case {
+  //border: 2px solid yellow;
+  box-shadow: 2px 4px 4px grey;
+  padding: 0px;
+  margin: 5px 10px;
+  width: fit-content;
+  height: fit-content;
+  cursor: pointer;
+  border-radius: 25px;
+}
+
+.actor-details {
+  //border: 2px solid red;
+  background-color: #e0e0e0;
+  padding: 5px 10px 5px 10px;
+  border-radius: 0px 0px 25px 25px;
+  font-size: 16px;
+  text-align: center;
+  //font-weight: bold;
+}
+
+
+.title {
+  font-weight: bold;
+}
+
 h1 {
   font-weight: bold;
+  //border: 2px solid skyblue;
+}
+
+h2 {
+  //border: 2px solid red;
+}
+
+h3 {
+  //border: 2px solid greenyellow;
+}
+
+h2 h3 {
+  margin: 0px;
 }
