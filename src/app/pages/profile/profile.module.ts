@@ -7,16 +7,14 @@ import { EffectsModule } from '@ngrx/effects';
 import { ProfileHomeComponent } from './profile-home/profile-home.component';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileFavoritesComponent } from './profile-favorites/profile-favorites.component';
-
+import { ProfileWatchlistComponent } from './profile-watchlist/profile-watchlist.component';
 
 @NgModule({
   declarations: [
-    ProfileHomeComponent, ProfileFavoritesComponent
+    ProfileHomeComponent,
+    ProfileFavoritesComponent,
+    ProfileWatchlistComponent,
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    ProfileRoutingModule
-  ],
+  imports: [CommonModule, SharedModule, ProfileRoutingModule],
 })
 export class ProfileModule {}

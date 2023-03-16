@@ -84,4 +84,21 @@ export class DataStorageService {
       });
     return listFavorites;
   }
+
+  getWatchList(userEmail: string) {
+    const watchList = [];
+    this.angularFirestore
+      .collection(`Users/${userEmail}/watchlist`)
+      .get()
+      .toPromise()
+      .then((querySnapshot) => {
+        querySnapshot.docs.forEach((doc) => {
+          watchList.push(doc.data());
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    return watchList;
+  }
 }
