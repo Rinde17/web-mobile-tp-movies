@@ -1,9 +1,18 @@
-<div class="container">
-    <h1 class="mt-3">Infos profil</h1>
-    <h2>{{ infosProfile.email }}</h2>
-    <h2>{{ infosProfile.last_name }}</h2>
-    <h2>{{ infosProfile.first_name }}</h2>
-    <h2>{{ infosProfile.uid }}</h2>
+<div class="container py-4">
+    <form>
+        <div>
+            <input type="text" class="form-control" name="first_name" [(ngModel)]="infosProfile.first_name"/>
+            <input type="text" class="form-control" name="last_name" [(ngModel)]="infosProfile.last_name"/>
+            <div class="alert alert-success" *ngIf="success">{{success}}</div>
+            <button type="submit" class="btn btn-primary" (click)="updateProfile()">Modifier nom et prénom</button>
+        </div>
+    </form>
+    <form>
+        <div>
+            <input type="password" class="form-control" name="email" placeholder="*********************" [(ngModel)]="password"/>
+            <button type="submit" class="btn btn-primary" (click)="updatePassword2(password)">Modifier votre mot de passe</button>
+        </div>
+    </form>
 </div>
 <div class="container">
     <web-mobile-tp-movies-profile-favorites></web-mobile-tp-movies-profile-favorites>
