@@ -14,6 +14,6 @@ export class ImgFallbackDirective {
     const element: HTMLImageElement = <HTMLImageElement>(
       this._elementRef.nativeElement
     );
-    element.src = this.appImgFallback || 'assets/no-poster.jpg';
+    element.src = this.appImgFallback || 'assets/no_image_available.jpg';
   }
 }

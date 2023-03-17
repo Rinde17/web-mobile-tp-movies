@@ -21,15 +21,15 @@ export interface ITvSerie {
     name: string;
     gender: number;
     profile_path: string|null;
-  }]
+  }];
   genres: [{
     id: number;
     name: string;
-  }]
+  }];
   networks: [{
     name: string;
     id: number;
     logo_path: string;
     origin_country: string;
-  }]
+  }];
 }

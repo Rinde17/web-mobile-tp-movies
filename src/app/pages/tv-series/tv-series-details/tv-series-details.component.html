@@ -1,4 +1,4 @@
-<div *ngIf="tvshow" style="border: 2px solid pink;">
+<div *ngIf="tvshow">
     <div
             class="header"
             [style.background-image]="
@@ -8,7 +8,7 @@
     "
     >
         <div class="custom-background">
-            <div class="container d-flex">
+            <div style="padding: 0px" class="container d-flex">
                     <img class="cover-image"
                             src="https://image.tmdb.org/t/p/w220_and_h330_face/{{tvshow.poster_path}}"
                             alt="{{ tvshow.name }}"
@@ -16,13 +16,14 @@
                     />
                     <div class="d-flex flex-column tvshow-details">
                         <h1>{{ tvshow.name }} ({{ tvshow.first_air_date | date: "y" }})</h1>
-                        <h3> Par :
+                        <h3>
+                            <span>De </span>
                             <span *ngFor="let user of tvshow.created_by; last as isLast">
                                 <span *ngIf="isLast === false"> {{user.name}},</span>
                                 <span *ngIf="isLast"> {{user.name}} </span>
                             </span>
                         </h3>
-                        <h2> Note : {{ tvshow.vote_average - tvshow.vote_average % 0.1 }}/10
+                        <h2> {{ tvshow.vote_average | number:'0.0-1' }} / 10
                             <h3> ({{ tvshow.vote_count }} votes) </h3>
                         </h2>
                         <h2>
@@ -52,14 +53,21 @@
                     </div>
             </div>
             <div class="tvshow-details">
-                <p> <span style="text-decoration: underline">Overview</span> : {{ tvshow.overview }}</p>
+                <p> <span class="title">Overview</span> : {{ tvshow.overview }}</p>
             </div>
         </div>
     </div>
-    <div class="container d-flex flew-row" style="border: 2px solid green; width: 100%;">
-        <div class="container d-flex flex-column" style="border: 2px solid yellow">
-            <span style="border: 2px solid red">TEST</span>
-            <span style="border: 2px solid blue">TEST</span>
+    <div>
+        <h2 class="cast-title">Casting :</h2>
+        <div class="d-flex flew-row overflow-auto cast-slider">
+            <div *ngFor="let actor of tvcredits.cast" class="container d-flex flex-column actor-case" (click)="redirect(actor.id)">
+                <img class="actor-image"
+                     src="https://image.tmdb.org/t/p/w220_and_h330_face/{{ actor.profile_path }}"
+                     alt="{{ actor.name }}"
+                     appImgFallback
+                />
+                <span class="actor-details">{{ actor.name }}</span>
+            </div>
         </div>
     </div>
 </div>
