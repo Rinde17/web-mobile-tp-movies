@@ -12,4 +12,25 @@ export interface IMovie {
   vote_count: number;
   video: boolean;
   vote_average: number;
+  genres: [{
+    id: number;
+    name: string;
+  }]
+}
+
+export interface IMovieCredits {
+  id: number;
+  cast: [{
+    adult: boolean;
+    gender: number | null;
+    id: number;
+    known_for_department: string;
+    name: string;
+    original_name: string;
+    popularity: number;
+    profile_path: string | null;
+    character: string;
+    credit_id: string;
+    order: number;
+  }];
 }

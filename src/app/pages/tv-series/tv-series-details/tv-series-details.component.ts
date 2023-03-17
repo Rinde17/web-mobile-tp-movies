@@ -1,8 +1,7 @@
-import {Component} from '@angular/core';
-import { ITvSerie } from 'src/app/interfaces/tvseries';
+import {Component, OnInit} from '@angular/core';
+import { ITvSerie, ITvCredit } from 'src/app/interfaces/tvseries';
 import {ActivatedRoute, Router} from '@angular/router';
 import { TmdbService } from 'src/app/services/tmdb/tmdb.service';
-import {ITvCredit} from "../../../interfaces/tvcredits";
 
 @Component({
   selector: 'web-mobile-tp-movies-tv-series-details',
@@ -20,7 +19,8 @@ export class TvSeriesDetailsComponent {
     private _router: Router
   ) {
     this.routeParameterId = this._activatedRoute.snapshot.params['id'];
-
+  }
+  ngOnInit(): void {
     this._tmdbService.tvseries(this.routeParameterId).subscribe((response) => {
       this.tvshow = response;
     });

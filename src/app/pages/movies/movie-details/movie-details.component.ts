@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IMovie } from 'src/app/interfaces/movie';
-import { ActivatedRoute } from '@angular/router';
+import { IMovie, IMovieCredits } from 'src/app/interfaces/movie';
+import {ActivatedRoute, Router} from '@angular/router';
 import { TmdbService } from 'src/app/services/tmdb/tmdb.service';
 
 @Component({
@@ -9,18 +9,27 @@ import { TmdbService } from 'src/app/services/tmdb/tmdb.service';
   styleUrls: ['./movie-details.component.scss'],
 })
 export class MovieDetailsComponent implements OnInit {
-  movies: IMovie | undefined;
+  movie: IMovie | undefined;
   routeParameterId: number;
 
   constructor(
     private _activatedRoute: ActivatedRoute,
-    private _tmdbService: TmdbService
+    private _tmdbService: TmdbService,
+    private _router: Router
   ) {
-    this.routeParameterId = _activatedRoute.snapshot.params['id'];
+    this.routeParameterId = this._activatedRoute.snapshot.params['id'];
   }
   ngOnInit(): void {
     this._tmdbService.movie(this.routeParameterId).subscribe((response) => {
-      this.movies = response;
+      this.movie = response;
     });
+
+    this._tmdbService.movieCredits(this.routeParameterId).subscribe((response) => {
+      this.movieCredits = response;
+    });
+  }
+
+  redirect(actorId: number): void {
+    this._router.navigate(['/people', actorId]);
   }
 }
