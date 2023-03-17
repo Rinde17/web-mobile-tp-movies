@@ -11,7 +11,6 @@ import { getAuth } from '@angular/fire/auth';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  listFavoris: any[];
   destroyed$: Subject<boolean> = new Subject<boolean>();
   constructor(
     private _dataStorageService: DataStorageService,
@@ -23,9 +22,9 @@ export class HomeComponent implements OnInit {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
         const authUser = getAuth().currentUser;
-        this.listFavoris = this._dataStorageService.getFavorites(
-          authUser?.email
-        );
+        // this.listFavoris = this._dataStorageService.getFavorites(
+        //   authUser?.email
+        // );
       });
   }
 }
