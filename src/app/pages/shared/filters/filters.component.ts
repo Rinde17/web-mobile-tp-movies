@@ -18,35 +18,31 @@ export class FiltersComponent implements OnInit {
   @Output() yearsChanged: EventEmitter<string> = new EventEmitter<string>();
   @Output() genreChanged: EventEmitter<string> = new EventEmitter<string>();
 
-  filterFormGroup: FormGroup;
+  filterFormGroup = new FormGroup({
+    year: new FormControl(TMDB_YEARS_OPTIONS[0], { nonNullable: true }),
+    sortBy: new FormControl(TMDB_SORTING_OPTIONS[0], { nonNullable: true }),
+    genre: new FormControl(TMDB_GENRE_OPTIONS[0], { nonNullable: true }),
+  });
   filterSortByOptions: ISelectOption[] = TMDB_SORTING_OPTIONS;
   filterGenreOptions: ISelectOption[] = TMDB_GENRE_OPTIONS;
   filterYearsOptions: ISelectOption[] = TMDB_YEARS_OPTIONS;
 
-  constructor() {
-    this.filterFormGroup = new FormGroup({
-      year: new FormControl('TMDB_YEARS_OPTIONS[0]'),
-      sortBy: new FormControl('TMDB_SORTING_OPTIONS[0]'),
-      genre: new FormControl('TMDB_GENRE_OPTIONS[0]'),
-    });
-  }
-
   ngOnInit(): void {
     this.filterFormGroup
       .get('year')
-      .valueChanges.subscribe((option: ISelectOption) => {
+      ?.valueChanges.subscribe((option: ISelectOption) => {
         this.yearsChanged.emit(option.value.toString());
       });
 
     this.filterFormGroup
       .get('sortBy')
-      .valueChanges.subscribe((option: ISelectOption) => {
+      ?.valueChanges.subscribe((option: ISelectOption) => {
         this.sortByChanged.emit(option.value.toString());
       });
 
     this.filterFormGroup
       .get('genre')
-      .valueChanges.subscribe((option: ISelectOption) => {
+      ?.valueChanges.subscribe((option: ISelectOption) => {
         this.genreChanged.emit(option.value.toString());
       });
   }

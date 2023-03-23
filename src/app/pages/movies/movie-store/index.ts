@@ -3,6 +3,7 @@ import { createReducer, on } from '@ngrx/store';
 import * as movieAction from './movie.actions';
 
 export const moviesStateFeatureKey = 'moviesState';
+export const movieStateDetailsFeatureKey = 'movieStateDetails';
 
 export interface IMoviesState {
   movies: IMovie[];
@@ -11,7 +12,7 @@ export interface IMoviesState {
 }
 
 export const initialState: IMoviesState = {
-  movies: null,
+  movies: [],
   error: null,
   isLoading: false,
 };
@@ -40,20 +41,20 @@ export const reducers = createReducer(
   })
 );
 
-export interface IMovieState {
-  movie: IMovie;
+export interface IMovieDetailsState {
+  movie: IMovie | null;
   error: any;
   isLoading: boolean;
 }
 
-export const initialMovieState: IMovieState = {
+export const initialMovieDetailsState: IMovieDetailsState = {
   movie: null,
   error: null,
   isLoading: false,
 };
 
 export const MovieDetailsReducers = createReducer(
-  initialMovieState,
+  initialMovieDetailsState,
   on(movieAction.loadMovieDetails, (state, action) => {
     return {
       ...state,

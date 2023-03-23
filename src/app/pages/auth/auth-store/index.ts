@@ -5,16 +5,20 @@ import * as authAction from './auth.actions';
 export const authStateFeatureKey = 'authState';
 
 export interface IAuthState {
-  user: IUser;
+  user: IUser | null;
   isLoading: boolean;
-  provider?: string;
+  provider: string | undefined;
   error: any;
 }
 
 export const initialState: IAuthState = {
-  user: null,
+  user: {
+    email: '',
+    uid: '',
+    photoURL: '',
+  },
   isLoading: false,
-  provider: null,
+  provider: '',
   error: null,
 };
 

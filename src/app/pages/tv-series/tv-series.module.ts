@@ -9,6 +9,7 @@ import { TvSeriesDetailsComponent } from './tv-series-details/tv-series-details.
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { TvSeriesEffects } from './tv-series-store/tv-series.effects';
+import { tvShowsDetailsStateFeatureKey } from './tv-series-store';
 
 @NgModule({
   declarations: [
@@ -19,10 +20,14 @@ import { TvSeriesEffects } from './tv-series-store/tv-series.effects';
   imports: [
     TvSeriesRoutingModule,
     SharedModule,
-    StoreModule.forFeature(tvShowState.tvShowsStateFeatureKey, [
-      tvShowState.reducers,
-      tvShowState.tvShowDetailsReducer,
-    ]),
+    StoreModule.forFeature(
+      tvShowState.tvShowsStateFeatureKey,
+      tvShowState.reducers
+    ),
+    StoreModule.forFeature(
+      tvShowState.tvShowsDetailsStateFeatureKey,
+      tvShowState.tvShowDetailsReducer
+    ),
     EffectsModule.forFeature([TvSeriesEffects]),
   ],
 })

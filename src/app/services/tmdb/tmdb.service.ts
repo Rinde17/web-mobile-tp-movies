@@ -61,7 +61,10 @@ export class TmdbService {
 
   constructor(private httpClient: HttpClient) {}
 
-  private UrlBuilder(endpoint: string, params?: object): string {
+  private UrlBuilder(
+    endpoint: string,
+    params?: Record<string, string>
+  ): string {
     const queryParams = params
       ? Object.keys(params)
           .map((key) => key + '=' + params[key])
@@ -70,7 +73,9 @@ export class TmdbService {
     return `${this._BASE_URL}${endpoint}?api_key=${this._API_KEY}&${queryParams}&language=fr-FR&region=FR`;
   }
 
-  discoverMovie(params: any): Observable<IDiscoverPageContent<IMovie>> {
+  discoverMovie(
+    params: Record<string, string>
+  ): Observable<IDiscoverPageContent<IMovie>> {
     console.log(this.UrlBuilder('/discover/movie'));
     return this.httpClient.get<IDiscoverPageContent<IMovie>>(
       this.UrlBuilder('/discover/movie', params)
@@ -83,7 +88,9 @@ export class TmdbService {
     );
   }
 
-  discoverTvShow(params: any): Observable<IDiscoverPageContent<ITvSerie>> {
+  discoverTvShow(
+    params: Record<string, string>
+  ): Observable<IDiscoverPageContent<ITvSerie>> {
     return this.httpClient.get<IDiscoverPageContent<ITvSerie>>(
       this.UrlBuilder('/discover/tv', params)
     );

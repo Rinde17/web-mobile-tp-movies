@@ -3,6 +3,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { getAuth } from '@angular/fire/auth';
 import { DataStorageService } from 'src/app/services/data-storage/data-storage.service';
+import { IFavori } from '../../../interfaces/favori';
 
 @Component({
   selector: 'web-mobile-tp-movies-profile-favorites',
@@ -10,7 +11,10 @@ import { DataStorageService } from 'src/app/services/data-storage/data-storage.s
   styleUrls: ['./profile-favorites.component.scss'],
 })
 export class ProfileFavoritesComponent implements OnInit {
-  listFavoris: any[];
+  authUser = getAuth().currentUser;
+  listFavoris: IFavori[] = this._dataStorageService.getFavorites(
+    this.authUser?.email
+  );
   destroyed$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
@@ -22,9 +26,6 @@ export class ProfileFavoritesComponent implements OnInit {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
         const authUser = getAuth().currentUser;
-        this.listFavoris = this._dataStorageService.getFavorites(
-            authUser?.email
-        );
       });
   }
 }

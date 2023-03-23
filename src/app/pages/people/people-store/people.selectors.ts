@@ -3,6 +3,8 @@ import {
   IPeopleState,
   IPersonCombinedCreditsState,
   IPersonDetailsState,
+  peopleCombinedCreditsStateFeatureKey,
+  peopleDetailsStateFeatureKey,
   peopleStateFeatureKey,
 } from './index';
 
@@ -12,36 +14,38 @@ export const selectPeopleFeature = createFeatureSelector<IPeopleState>(
 
 export const selectPeople = createSelector(
   selectPeopleFeature,
-  (state: IPeopleState) => state[0].people
+  (state: IPeopleState) => state.people
 );
 
 export const selectError = createSelector(
   selectPeopleFeature,
-  (state: IPeopleState) => state[0].error
+  (state: IPeopleState) => state.error
 );
 
 export const selectPeopleDetailsFeature =
-  createFeatureSelector<IPersonDetailsState>(peopleStateFeatureKey);
+  createFeatureSelector<IPersonDetailsState>(peopleDetailsStateFeatureKey);
 
 export const selectPersonDetails = createSelector(
   selectPeopleDetailsFeature,
-  (state: IPersonDetailsState) => state[1].personDetails
+  (state: IPersonDetailsState) => state.personDetails
 );
 
 export const selectPersonDetailsFailure = createSelector(
   selectPeopleDetailsFeature,
-  (state: IPersonDetailsState) => state[1].error
+  (state: IPersonDetailsState) => state.error
 );
 
 export const selectPersonCreitsFeature =
-  createFeatureSelector<IPersonCombinedCreditsState>(peopleStateFeatureKey);
+  createFeatureSelector<IPersonCombinedCreditsState>(
+    peopleCombinedCreditsStateFeatureKey
+  );
 
 export const selectPersonCredits = createSelector(
   selectPersonCreitsFeature,
-  (state: IPersonCombinedCreditsState) => state[2].personCombinedCredits
+  (state: IPersonCombinedCreditsState) => state.personCombinedCredits
 );
 
 export const selectPersonCreditsFailure = createSelector(
   selectPersonCreitsFeature,
-  (state: IPersonCombinedCreditsState) => state[2].error
+  (state: IPersonCombinedCreditsState) => state.error
 );

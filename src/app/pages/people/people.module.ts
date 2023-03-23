@@ -21,11 +21,18 @@ import { PeopleEffects } from './people-store/people.effects';
     CommonModule,
     PeopleRoutingModule,
     SharedModule,
-    StoreModule.forFeature(peopleState.peopleStateFeatureKey, [
-      peopleState.reducers,
-      peopleState.personDetailsReducer,
-      peopleState.personCombinedCreditsReducer,
-    ]),
+    StoreModule.forFeature(
+      peopleState.peopleStateFeatureKey,
+      peopleState.reducers
+    ),
+    StoreModule.forFeature(
+      peopleState.peopleDetailsStateFeatureKey,
+      peopleState.personDetailsReducer
+    ),
+    StoreModule.forFeature(
+      peopleState.peopleCombinedCreditsStateFeatureKey,
+      peopleState.personCombinedCreditsReducer
+    ),
     EffectsModule.forFeature([PeopleEffects]),
   ],
 })

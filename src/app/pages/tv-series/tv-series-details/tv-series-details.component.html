@@ -60,7 +60,7 @@
     <div>
         <h2 class="cast-title">Casting :</h2>
         <div class="d-flex flew-row overflow-auto cast-slider">
-            <div *ngFor="let actor of tvcredits.cast" class="container d-flex flex-column actor-case" (click)="redirect(actor.id)">
+            <div *ngFor="let actor of tvcredits?.cast" class="container d-flex flex-column actor-case" (click)="redirect(actor.id)">
                 <img class="actor-image"
                      src="https://image.tmdb.org/t/p/w220_and_h330_face/{{ actor.profile_path }}"
                      alt="{{ actor.name }}"
