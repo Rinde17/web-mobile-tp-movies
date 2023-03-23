@@ -14,13 +14,13 @@ import { Subject } from 'rxjs';
   styleUrls: ['./movie-list-item.component.scss'],
 })
 export class MovieListItemComponent implements OnInit {
-  @Input() movie: IMovie;
+  @Input() movie: IMovie | undefined;
   @Output() addedToWatchlist = new EventEmitter<IMovie>();
   @Output() addedToFavorite = new EventEmitter<IMovie>();
 
   faList = faList;
   faHeart = faHeart;
-  currentUser: IUser;
+  currentUser: IUser | null = null;
 
   destroyed$: Subject<boolean> = new Subject<boolean>();
 
@@ -33,7 +33,9 @@ export class MovieListItemComponent implements OnInit {
   }
 
   redirect(): void {
-    this._router.navigate(['/movies', this.movie.id]);
+    if (this.movie) {
+      this._router.navigate(['/movies', this.movie.id]);
+    }
   }
 
   addToWatchlist(): void {

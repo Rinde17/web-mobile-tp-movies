@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./people-details.component.scss'],
 })
 export class PeopleDetailsComponent implements OnInit {
-  person: IPersonDetails;
+  person: IPersonDetails | undefined;
   routerParameterId: number;
 
   credits: {
@@ -27,7 +27,7 @@ export class PeopleDetailsComponent implements OnInit {
     private _tmdbService: TmdbService,
     private _router: Router
   ) {
-    this.routerParameterId = _activatedRoute.snapshot.params.id;
+    this.routerParameterId = _activatedRoute.snapshot.params['id'];
   }
 
   ngOnInit(): void {
@@ -47,7 +47,7 @@ export class PeopleDetailsComponent implements OnInit {
       });
   }
 
-  redirectToMedia(mediaType: string, castId): void {
+  redirectToMedia(mediaType: string, castId: number): void {
     const route = mediaType === 'movie' ? '/movies' : '/tv-shows';
     this._router.navigate([route, castId]);
   }

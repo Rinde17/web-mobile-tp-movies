@@ -9,14 +9,14 @@ import { TmdbService } from 'src/app/services/tmdb/tmdb.service';
   styleUrls: ['./movie-details.component.scss'],
 })
 export class MovieDetailsComponent implements OnInit {
-  movies: IMovie;
+  movies: IMovie | undefined;
   routeParameterId: number;
 
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _tmdbService: TmdbService
   ) {
-    this.routeParameterId = _activatedRoute.snapshot.params.id;
+    this.routeParameterId = _activatedRoute.snapshot.params['id'];
   }
   ngOnInit(): void {
     this._tmdbService.movie(this.routeParameterId).subscribe((response) => {

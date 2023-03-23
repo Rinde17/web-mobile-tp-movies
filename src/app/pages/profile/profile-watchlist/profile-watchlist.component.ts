@@ -4,6 +4,7 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { DataStorageService } from '../../../services/data-storage/data-storage.service';
 import { takeUntil } from 'rxjs/operators';
 import { getAuth } from '@angular/fire/auth';
+import { IWatchList } from '../../../interfaces/watchlist';
 
 @Component({
   selector: 'web-mobile-tp-movies-profile-watchlist',
@@ -11,7 +12,10 @@ import { getAuth } from '@angular/fire/auth';
   styleUrls: ['./profile-watchlist.component.scss'],
 })
 export class ProfileWatchlistComponent {
-  watchList: any[];
+  authUser = getAuth().currentUser;
+  watchList: IWatchList[] = this._dataStorageService.getWatchList(
+    this.authUser?.email
+  );
   destroyed$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
@@ -23,7 +27,6 @@ export class ProfileWatchlistComponent {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
         const authUser = getAuth().currentUser;
-        this.watchList = this._dataStorageService.getWatchList(authUser?.email);
       });
   }
 }

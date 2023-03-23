@@ -2,7 +2,7 @@ export interface IFirestoreMedia {
   id: number;
   title: string;
   isWatched: boolean;
-  posterPath: string;
+  posterPath: string | null;
   createdAt: Date;
   mediaType: string;
 }

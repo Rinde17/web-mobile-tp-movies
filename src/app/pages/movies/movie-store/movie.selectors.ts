@@ -1,5 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { IMoviesState, moviesStateFeatureKey } from '.';
+import {
+  IMoviesState,
+  IMovieDetailsState,
+  moviesStateFeatureKey,
+  movieStateDetailsFeatureKey,
+} from './index';
 
 export const selectMoviesFeature = createFeatureSelector<IMoviesState>(
   moviesStateFeatureKey
@@ -15,16 +20,15 @@ export const selectError = createSelector(
   (state: IMoviesState) => state.error
 );
 
-export const selectMovieDetailsFeature = createFeatureSelector<IMoviesState>(
-  moviesStateFeatureKey
-);
+export const selectMovieDetailsFeature =
+  createFeatureSelector<IMovieDetailsState>(movieStateDetailsFeatureKey);
 
 export const selectMovieDetails = createSelector(
   selectMovieDetailsFeature,
-  (state: IMoviesState) => state[1].movie
+  (state: IMovieDetailsState) => state.movie
 );
 
 export const selectMovieDetailsError = createSelector(
   selectMovieDetailsFeature,
-  (state: IMoviesState) => state[1].error
+  (state: IMovieDetailsState) => state.error
 );

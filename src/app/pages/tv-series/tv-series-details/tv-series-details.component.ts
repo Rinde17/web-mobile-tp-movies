@@ -10,8 +10,8 @@ import {ITvCredit} from "../../../interfaces/tvcredits";
   styleUrls: ['./tv-series-details.component.scss'],
 })
 export class TvSeriesDetailsComponent {
-  tvshow: ITvSerie;
-  tvcredits: ITvCredit;
+  tvshow: ITvSerie | undefined;
+  tvcredits: ITvCredit | undefined;
   routeParameterId: number;
 
   constructor(
@@ -19,7 +19,7 @@ export class TvSeriesDetailsComponent {
     private _tmdbService: TmdbService,
     private _router: Router
   ) {
-    this.routeParameterId = this._activatedRoute.snapshot.params.id;
+    this.routeParameterId = this._activatedRoute.snapshot.params['id'];
 
     this._tmdbService.tvseries(this.routeParameterId).subscribe((response) => {
       this.tvshow = response;

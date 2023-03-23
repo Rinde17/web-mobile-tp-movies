@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./people-list-item.component.scss'],
 })
 export class PeopleListItemComponent implements OnInit {
-  @Input() person: IPerson;
+  @Input() person: IPerson | undefined;
 
   constructor(private _router: Router) {}
 
@@ -19,14 +19,20 @@ export class PeopleListItemComponent implements OnInit {
 
   // Iterate thru the known for property and check if it's movie or a tv show so we can display it without errors.
   formattedKnownFor() {
-    return this.person.known_for
-      .map((item) => {
-        return isMovieTypeGuard(item) ? item.title : item.name;
-      })
-      .join(', ');
+    if (this.person) {
+      return this.person.known_for
+        .map((item) => {
+          return isMovieTypeGuard(item) ? item.title : item.name;
+        })
+        .join(', ');
+    }
+    return null;
   }
 
   redirect(): void {
-    this._router.navigate(['/people', this.person.id]);
+    if (this.person) {
+      this._router.navigate(['/people', this.person.id]);
+    }
+    this._router.navigate(['/home']);
   }
 }

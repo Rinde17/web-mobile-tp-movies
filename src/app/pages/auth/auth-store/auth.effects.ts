@@ -5,6 +5,7 @@ import * as authActions from './auth.actions';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { IUser } from '../../../interfaces/user';
 
 @Injectable()
 export class AuthEffects {
@@ -20,7 +21,7 @@ export class AuthEffects {
                 user: { uid, email, photoURL },
               });
             } else {
-              authActions.getUserFailure();
+              return authActions.getUserFailure();
             }
           }),
           catchError((error) => {
@@ -37,7 +38,11 @@ export class AuthEffects {
       ofType(authActions.logOut),
       mergeMap((payload) =>
         of(this._authService.logOut()).pipe(
-          map((response) => authActions.logOutSuccess({ user: null })),
+          map((response) =>
+            authActions.logOutSuccess({
+              user: { uid: '', photoURL: '', email: '' },
+            })
+          ),
           catchError((error) => of(authActions.logOutFailure({ error })))
         )
       )

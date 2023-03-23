@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./tv-series-list-item.component.scss'],
 })
 export class TvSeriesListItemComponent {
-  @Input() tvshow: ITvSerie;
+  @Input() tvshow: ITvSerie | any;
 
   constructor(private _router: Router) {}
 
