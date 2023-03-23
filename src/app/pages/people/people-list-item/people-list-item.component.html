@@ -1,4 +1,4 @@
-<div class="card" (click)="redirect()">
+<div *ngIf="person" class="card" (click)="redirect()">
     <img
             class="card-img-top"
             src="https://image.tmdb.org/t/p/w235_and_h235_face/{{

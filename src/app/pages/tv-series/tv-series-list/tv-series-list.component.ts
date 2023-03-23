@@ -25,10 +25,10 @@ import * as tvShowActions from '../tv-series-store/tv-series.actions';
   styleUrls: ['./tv-series-list.component.scss'],
 })
 export class TvSeriesListComponent implements OnInit {
-  tvseries$: Observable<ITvSerie[]>;
-  errorMessage$: Observable<string>;
-  currentUser: IUser;
-  searchText: '';
+  tvseries$: Observable<ITvSerie[]> = this._store.pipe(select(selectTvShow));
+  errorMessage$: Observable<string> | undefined;
+  currentUser: IUser | null = null;
+  searchText = '';
 
   destroyed$: Subject<boolean> = new Subject<boolean>();
 
@@ -52,7 +52,6 @@ export class TvSeriesListComponent implements OnInit {
       .subscribe((user) => {
         this.currentUser = user;
       });
-    this.tvseries$ = this._store.pipe(select(selectTvShow));
     this.errorMessage$ = this._store.pipe(select(selectError));
   }
 

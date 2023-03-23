@@ -4,6 +4,9 @@ import * as personAction from './people.actions';
 import { IPerson, IPersonDetails } from '../../../interfaces/person';
 
 export const peopleStateFeatureKey = 'peopleState';
+export const peopleDetailsStateFeatureKey = 'peopleDetailsState';
+export const peopleCombinedCreditsStateFeatureKey =
+  'peopleCombinedCreditsState';
 
 export interface IPeopleState {
   people: IPerson[];
@@ -12,7 +15,7 @@ export interface IPeopleState {
 }
 
 export const initialState: IPeopleState = {
-  people: null,
+  people: [],
   error: null,
   isLoading: false,
 };
@@ -42,7 +45,7 @@ export const reducers = createReducer(
 );
 
 export interface IPersonDetailsState {
-  personDetails: IPersonDetails;
+  personDetails: IPersonDetails | null;
   error: any;
   isLoading: boolean;
 }
@@ -78,7 +81,7 @@ export const personDetailsReducer = createReducer(
 );
 
 export interface IPersonCombinedCreditsState {
-  personCombinedCredits: IPersonCombinedCreditsResponse;
+  personCombinedCredits: IPersonCombinedCreditsResponse | null;
   error: any;
   isLoading: boolean;
 }

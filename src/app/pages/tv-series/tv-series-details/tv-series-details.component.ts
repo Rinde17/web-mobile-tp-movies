@@ -10,14 +10,14 @@ import { TmdbService } from 'src/app/services/tmdb/tmdb.service';
   styleUrls: ['./tv-series-details.component.scss'],
 })
 export class TvSeriesDetailsComponent {
-  tvshow: ITvSerie;
+  tvshow: ITvSerie | undefined;
   routeParameterId: number;
 
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _tmdbService: TmdbService
   ) {
-    this.routeParameterId = this._activatedRoute.snapshot.params.id;
+    this.routeParameterId = this._activatedRoute.snapshot.params['id'];
 
     this._tmdbService.tvseries(this.routeParameterId).subscribe((response) => {
       this.tvshow = response;

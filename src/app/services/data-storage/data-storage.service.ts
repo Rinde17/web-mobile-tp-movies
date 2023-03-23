@@ -9,6 +9,9 @@ import { isMovieTypeGuard } from 'src/app/interfaces/person';
 import { IFirestoreMedia } from 'src/app/interfaces/firestore';
 import 'firebase/firestore';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { IWatchList } from '../../interfaces/watchlist';
+import firebase from 'firebase/compat';
+import { IFavori } from '../../interfaces/favori';
 
 @Injectable({
   providedIn: 'root',
@@ -68,16 +71,20 @@ export class DataStorageService {
       .catch((error) => callback(error));
   }
 
-  getFavorites(userEmail: string) {
-    const listFavorites = [];
+  getFavorites(userEmail: string | null | undefined) {
+    const listFavorites: IFavori[] = [];
     this.angularFirestore
       .collection(`Users/${userEmail}/favorite`)
       .get()
       .toPromise()
       .then((querySnapshot) => {
-        querySnapshot.docs.forEach((doc) => {
-          listFavorites.push(doc.data());
-        });
+        if (querySnapshot) {
+          querySnapshot.docs.forEach((doc) => {
+            if (doc.data()) {
+              listFavorites.push(<IFavori>doc.data());
+            }
+          });
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -85,16 +92,18 @@ export class DataStorageService {
     return listFavorites;
   }
 
-  getWatchList(userEmail: string) {
-    const watchList = [];
+  getWatchList(userEmail: string | null | undefined) {
+    const watchList: IWatchList[] = [];
     this.angularFirestore
       .collection(`Users/${userEmail}/watchlist`)
       .get()
       .toPromise()
       .then((querySnapshot) => {
-        querySnapshot.docs.forEach((doc) => {
-          watchList.push(doc.data());
-        });
+        if (querySnapshot) {
+          querySnapshot.docs.forEach((doc) => {
+            watchList.push(<IWatchList>doc.data());
+          });
+        }
       })
       .catch((err) => {
         console.log(err);

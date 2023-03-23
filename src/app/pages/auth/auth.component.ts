@@ -14,8 +14,8 @@ import { IAuthState } from './auth-store';
 })
 export class AuthComponent implements OnInit {
   authSwitch = 'login';
-  loginForm: FormGroup;
-  registerForm: FormGroup;
+  loginForm: FormGroup | undefined;
+  registerForm: FormGroup | undefined;
   loginFormError = '';
   registerFormError = '';
 
@@ -32,29 +32,33 @@ export class AuthComponent implements OnInit {
   }
 
   onSubmitLoginForm(): void {
-    this._authService.loginWithEmailAndPassword(
-      this.loginForm.value,
-      (error) => {
-        if (error) {
-          this.loginFormError = error;
-        } else {
-          this._router.navigate(['/movies']);
+    if (this.loginForm) {
+      this._authService.loginWithEmailAndPassword(
+        this.loginForm.value,
+        (error) => {
+          if (error) {
+            this.loginFormError = error;
+          } else {
+            this._router.navigate(['/movies']);
+          }
         }
-      }
-    );
+      );
+    }
   }
 
   onSubmitRegisterForm(): void {
-    this._authService.registerWithEmailAndPassword(
-      this.registerForm.value,
-      (error) => {
-        if (error) {
-          this.registerFormError = error;
-        } else {
-          this._router.navigate(['/movies']);
+    if (this.registerForm) {
+      this._authService.registerWithEmailAndPassword(
+        this.registerForm.value,
+        (error) => {
+          if (error) {
+            this.registerFormError = error;
+          } else {
+            this._router.navigate(['/movies']);
+          }
         }
-      }
-    );
+      );
+    }
   }
 
   ngOnInit(): void {
@@ -67,6 +71,7 @@ export class AuthComponent implements OnInit {
     });
 
     this.registerForm = new FormGroup({
+      url_picture: new FormControl('', [Validators.required]),
       last_name: new FormControl('', [
         Validators.required,
         Validators.maxLength(200),

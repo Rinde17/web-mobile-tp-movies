@@ -3,6 +3,7 @@ import { createReducer, on } from '@ngrx/store';
 import * as tvShowsAction from './tv-series.actions';
 
 export const tvShowsStateFeatureKey = 'tvShowsState';
+export const tvShowsDetailsStateFeatureKey = 'tvShowsDetailsState';
 
 export interface ITvShowsState {
   tvShows: ITvSerie[];
@@ -11,7 +12,7 @@ export interface ITvShowsState {
 }
 
 export const initialState: ITvShowsState = {
-  tvShows: null,
+  tvShows: [],
   error: null,
   isLoading: false,
 };
@@ -40,7 +41,7 @@ export const reducers = createReducer(
   })
 );
 export interface ITvShowDetailsState {
-  tvShow: ITvSerie;
+  tvShow: ITvSerie | null;
   error: any;
   isLoading: boolean;
 }

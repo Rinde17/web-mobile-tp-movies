@@ -3,6 +3,7 @@ import {
   ITvShowDetailsState,
   ITvShowsState,
   tvShowsStateFeatureKey,
+  tvShowsDetailsStateFeatureKey,
 } from './index';
 
 export const selectTvShowFeature = createFeatureSelector<ITvShowsState>(
@@ -11,23 +12,23 @@ export const selectTvShowFeature = createFeatureSelector<ITvShowsState>(
 
 export const selectTvShow = createSelector(
   selectTvShowFeature,
-  (state: ITvShowsState) => state[0].tvShows
+  (state: ITvShowsState) => state.tvShows
 );
 
 export const selectError = createSelector(
   selectTvShowFeature,
-  (state: ITvShowsState) => state[0].error
+  (state: ITvShowsState) => state.error
 );
 
 export const selectTvShowDetailsFeature =
-  createFeatureSelector<ITvShowDetailsState>(tvShowsStateFeatureKey);
+  createFeatureSelector<ITvShowDetailsState>(tvShowsDetailsStateFeatureKey);
 
 export const selectTvShowDetails = createSelector(
   selectTvShowDetailsFeature,
-  (state: ITvShowDetailsState) => state[1].tvShow
+  (state: ITvShowDetailsState) => state.tvShow
 );
 
 export const selectTvShowDetailsError = createSelector(
   selectTvShowDetailsFeature,
-  (state: ITvShowDetailsState) => state[1].error
+  (state: ITvShowDetailsState) => state.error
 );
