@@ -12,7 +12,7 @@ import {
 import { DataStorageService } from 'src/app/services/data-storage/data-storage.service';
 import { IUser } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { IMovieState } from '../movie-store';
+import { IMovieDetailsState } from '../movie-store';
 import * as movieActions from '../movie-store/movie.actions';
 import { selectMovies, selectError } from '../movie-store/movie.selectors';
 import { Observable, Subject } from 'rxjs';
@@ -23,12 +23,12 @@ import { Observable, Subject } from 'rxjs';
   styleUrls: ['./movie-list.component.scss'],
 })
 export class MovieListComponent implements OnInit {
-  movies: IMovie[];
-  searchText: '';
-  currentUser: IUser;
+  movies: IMovie[] = [];
+  searchText = '';
+  currentUser: IUser | null = null;
 
-  movies$: Observable<IMovie[]>;
-  errorMessage$: Observable<string>;
+  movies$: Observable<IMovie[]> = this._store.pipe(select(selectMovies));
+  errorMessage$: Observable<string> | undefined;
 
   destroyed$: Subject<boolean> = new Subject<boolean>();
 
@@ -42,7 +42,7 @@ export class MovieListComponent implements OnInit {
     private _tmdbService: TmdbService,
     private _dataStorageService: DataStorageService,
     private _authService: AuthService,
-    private _store: Store<IMovieState>
+    private _store: Store<IMovieDetailsState>
   ) {}
 
   ngOnInit(): void {
@@ -56,7 +56,6 @@ export class MovieListComponent implements OnInit {
         this.currentUser = user;
       });
 
-    this.movies$ = this._store.pipe(select(selectMovies));
     this.errorMessage$ = this._store.pipe(select(selectError));
   }
 
@@ -85,33 +84,35 @@ export class MovieListComponent implements OnInit {
   }
 
   addToWatchlist(movie: IMovie): void {
-    console.log(this.currentUser.uid);
-    this._dataStorageService.addMediaToWatchlist(
-      movie,
-      this.currentUser.email,
-      (error) => {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('Added to Watchlist');
+    if (this.currentUser && this.currentUser.email) {
+      this._dataStorageService.addMediaToWatchlist(
+        movie,
+        this.currentUser.email,
+        (error) => {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('Added to Watchlist');
+          }
         }
-      }
-    );
+      );
+    }
   }
 
   addToFavorites(movie: IMovie): void {
-    console.log(this.currentUser.uid);
-    this._dataStorageService.addMediaToFavorite(
-      movie,
-      this.currentUser.email,
-      (error) => {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('Added to Favorites');
+    if (this.currentUser && this.currentUser.email) {
+      this._dataStorageService.addMediaToFavorite(
+        movie,
+        this.currentUser.email,
+        (error) => {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('Added to Favorites');
+          }
         }
-      }
-    );
+      );
+    }
   }
 
   ngOnDestroy(): void {

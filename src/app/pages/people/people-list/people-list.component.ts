@@ -14,10 +14,10 @@ import { selectPeople, selectError } from '../people-store/people.selectors';
   styleUrls: ['./people-list.component.scss'],
 })
 export class PeopleListComponent implements OnInit {
-  people$: Observable<IPerson[]>;
-  errorMessage$: Observable<string>;
+  people$: Observable<IPerson[]> | undefined;
+  errorMessage$: Observable<string> | undefined;
 
-  searchText: '';
+  searchText = '';
 
   constructor(
     private _tmdbService: TmdbService,

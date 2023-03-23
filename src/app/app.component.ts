@@ -16,7 +16,7 @@ import * as authActions from './pages/auth/auth-store/auth.actions';
 export class AppComponent implements OnInit {
   isShown = false;
 
-  user: IUser;
+  user: IUser | null = null;
 
   destroyed$: Subject<boolean> = new Subject<boolean>();
 

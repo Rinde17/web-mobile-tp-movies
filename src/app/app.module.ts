@@ -16,6 +16,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AuthEffects } from './pages/auth/auth-store/auth.effects';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routes';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -27,6 +28,7 @@ import { appRoutes } from './app.routes';
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
     ButtonsModule.forRoot(),
     AlertModule.forRoot(),
     StoreModule.forRoot({}, {}),
