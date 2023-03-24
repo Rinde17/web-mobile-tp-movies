@@ -63,21 +63,43 @@
 
         <ng-template #authSwitchRegister>
             <div *ngIf="registerForm" class="card-body">
-                <form class="mb-3" [formGroup]="registerForm" (ngSubmit)="onSubmitRegisterForm()">
+                <div class="row mb-3">
+                    <div class="col text-center">
+                        <button class="btn btn-danger w-100" (click)="switchUsePhoto(false)">Importer Photo</button>
+                    </div>
+                    <div class="col text-center">
+                        <button class="btn btn-danger w-100" (click)="switchUsePhoto(true)">Prendre Photo</button>
+                    </div>
+                </div>
 
-                    <div class="form-group">
-                        <label for="last_name">Image profile</label>
-                        <input type="file" id="url_picture" class="form-control" formControlName="url_picture" [ngClass]="{
-                        'is_invalid':
-                                !registerForm.get('url_picture')?.valid && registerForm.get('url_picture')?.dirty
-                        }"/>
-                        <div class="invalid-feedback d-block" *ngIf="
-                                registerForm.get('url_picture')?.hasError('required') && registerForm.get('url_picture')?.dirty
-                            "
-                        >
-                            Image requise
+                <div *ngIf="!usePhoto" class="form-group">
+                    <label>Image profile</label>
+                    <input type="file" class="form-control"
+                           (change)="onFileChange($event)"
+                    />
+
+                </div>
+
+                <div *ngIf="usePhoto" class="form-group">
+
+                    <div class="col">
+                        <div class="row text-center mx-auto w-100">
+                            <webcam [width]="280"
+                                    [trigger]="triggerObservable()"
+                                    (imageCapture)="handleImage($event)"
+                            ></webcam>
+                        </div>
+                        <div class="row text-center mx-auto w-100">
+                            <img [width]="280" src="{{ captureImage }}">
+                        </div>
+                        <div class="row mt-2">
+                            <button class="btn btn-warning w-100" (click)="triggerSnapshot()">Prendre une photo</button>
                         </div>
                     </div>
+
+                </div>
+                <form class="mb-3" [formGroup]="registerForm" (ngSubmit)="onSubmitRegisterForm()">
+
 
                     <div class="form-group">
                         <label for="last_name">Nom</label>

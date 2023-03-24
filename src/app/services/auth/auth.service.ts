@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, finalize, Observable, takeLast } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { getDownloadURL, ref } from '@angular/fire/storage';
+import { switchMap } from 'rxjs/operators';
+import firebase from 'firebase/compat';
+import User = firebase.User;
 
 @Injectable({
   providedIn: 'root',
@@ -51,20 +55,29 @@ export class AuthService {
       last_name: string;
       first_name: string;
       email: string;
-      url_picture: string;
       password: string;
     },
+    file: File | null,
+    usePhoto: boolean,
+    captureImage: string,
     callback: (error?: any) => void
   ) {
     return this._angularFireAuth
       .createUserWithEmailAndPassword(credentials.email, credentials.password)
       .then((response) => {
         if (response.user) {
+          if (usePhoto) {
+            console.log(captureImage);
+            this.addToFireStorageCapture(captureImage, response.user);
+          }
+          if (file !== null) {
+            this.addToFireStorageFile(file, response.user);
+          }
+
           this.addToFirestore(
             credentials.email,
             credentials.last_name,
             credentials.first_name,
-            credentials.url_picture,
             response.user.uid
           );
         }
@@ -79,14 +92,12 @@ export class AuthService {
     email: string,
     last_name: string,
     first_name: string,
-    url_picture: string,
     uid: string
   ) {
     const data = {
       email: email,
       last_name: last_name,
       first_name: first_name,
-      url_picture: url_picture,
       uid: uid,
     };
 
@@ -98,12 +109,53 @@ export class AuthService {
       .catch((err) => console.log(err));
   }
 
+  addToFireStorageFile(file: File, user: User) {
+    const filePath = '/uploads/' + user.uid + '/' + file.name;
+    const storageRef = this.angularFireStorage.ref(filePath);
+    const uploadTask = this.angularFireStorage.upload(filePath, file);
+
+    uploadTask
+      .snapshotChanges()
+      .pipe(
+        takeLast(1),
+        switchMap(() => {
+          return storageRef.getDownloadURL();
+        })
+      )
+      .subscribe((downladURL) => {
+        user.updateProfile({
+          photoURL: downladURL,
+        });
+      });
+  }
+
+  addToFireStorageCapture(capture: string, user: User) {
+    const filePath = '/uploads/' + user.uid + '/';
+    const storageRef = this.angularFireStorage.ref(filePath);
+    const putStringTask = storageRef.putString(capture, 'data_url');
+    // const putStringTask = storageRef.put(capture.toString());
+
+    putStringTask
+      .snapshotChanges()
+      .pipe(
+        takeLast(1),
+        switchMap(() => {
+          return storageRef.getDownloadURL();
+        })
+      )
+      .subscribe((dowloadURL) => {
+        console.log(dowloadURL);
+        user.updateProfile({
+          photoURL: dowloadURL,
+        });
+      });
+  }
+
   getInfos(userEmail: string | null) {
     const infosProfile = {
       email: '',
       last_name: '',
       first_name: '',
-      url_picture: '',
       uid: '',
     };
     this.angularFirestore
@@ -115,7 +167,6 @@ export class AuthService {
           infosProfile.email = querySnapshot.get('email');
           infosProfile.last_name = querySnapshot.get('last_name');
           infosProfile.first_name = querySnapshot.get('first_name');
-          infosProfile.url_picture = querySnapshot.get('url_picture');
           infosProfile.uid = querySnapshot.get('uid');
         }
       })

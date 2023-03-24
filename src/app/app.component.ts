@@ -27,20 +27,18 @@ export class AppComponent implements OnInit {
     ) {
     }
 
-    ngOnInit() {
-        this._authService.userState
-            .pipe(takeUntil(this.destroyed$))
-            .subscribe((response) => {
-                this.user = response
-                this.infosProfile = this.getInfos(this.user?.email);
-            })
-        ;
-    }
-
     logOut(): void {
         this.store.dispatch(authActions.logOut());
         this._router.navigate(['/auth']);
     }
+  ngOnInit() {
+    this._authService.userState
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((response) => {
+        console.log(response);
+        this.user = response;
+      });
+  }
 
     logIn(): void {
         this._router.navigate(['/auth']);

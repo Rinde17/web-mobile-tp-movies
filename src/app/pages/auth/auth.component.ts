@@ -6,6 +6,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { IAuthState } from './auth-store';
+import { Observable, Subject } from 'rxjs';
+import { WebcamImage } from 'ngx-webcam';
 
 @Component({
   selector: 'web-mobile-tp-movies-app-auth',
@@ -18,6 +20,13 @@ export class AuthComponent implements OnInit {
   registerForm: FormGroup | undefined;
   loginFormError = '';
   registerFormError = '';
+  file: File | null = null;
+  trigger: Subject<any> = new Subject();
+  webcamImage!: WebcamImage;
+  nextWebcam: Subject<any> = new Subject();
+  captureImage = '';
+
+  usePhoto = false;
 
   constructor(
     private _authService: AuthService,
@@ -50,6 +59,9 @@ export class AuthComponent implements OnInit {
     if (this.registerForm) {
       this._authService.registerWithEmailAndPassword(
         this.registerForm.value,
+        this.file,
+        this.usePhoto,
+        this.captureImage,
         (error) => {
           if (error) {
             this.registerFormError = error;
@@ -59,6 +71,13 @@ export class AuthComponent implements OnInit {
         }
       );
     }
+  }
+
+  onFileChange(event: Event) {
+    const target = event.target as HTMLInputElement;
+    if (!target.files) return;
+    const files = target.files as FileList;
+    this.file = files[0];
   }
 
   ngOnInit(): void {
@@ -71,7 +90,6 @@ export class AuthComponent implements OnInit {
     });
 
     this.registerForm = new FormGroup({
-      url_picture: new FormControl('', [Validators.required]),
       last_name: new FormControl('', [
         Validators.required,
         Validators.maxLength(200),
@@ -86,5 +104,22 @@ export class AuthComponent implements OnInit {
       ]),
       email: new FormControl('', [Validators.required, Validators.email]),
     });
+  }
+
+  triggerSnapshot(): void {
+    this.trigger.next(false);
+  }
+
+  handleImage(webCamImage: WebcamImage): void {
+    this.webcamImage = webCamImage;
+    this.captureImage = webCamImage?.imageAsDataUrl;
+  }
+
+  triggerObservable(): Observable<any> {
+    return this.trigger.asObservable();
+  }
+
+  switchUsePhoto(use: boolean) {
+    this.usePhoto = use;
   }
 }
