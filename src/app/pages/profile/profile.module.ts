@@ -8,6 +8,7 @@ import { ProfileHomeComponent } from './profile-home/profile-home.component';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileFavoritesComponent } from './profile-favorites/profile-favorites.component';
 import { ProfileWatchlistComponent } from './profile-watchlist/profile-watchlist.component';
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [
@@ -15,6 +16,6 @@ import { ProfileWatchlistComponent } from './profile-watchlist/profile-watchlist
     ProfileFavoritesComponent,
     ProfileWatchlistComponent,
   ],
-  imports: [CommonModule, SharedModule, ProfileRoutingModule],
+    imports: [CommonModule, SharedModule, ProfileRoutingModule, FontAwesomeModule],
 })
 export class ProfileModule {}

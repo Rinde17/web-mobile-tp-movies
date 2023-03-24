@@ -15,7 +15,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile-home.component.scss'],
 })
 export class ProfileHomeComponent implements OnInit {
-  infosProfile: any;
+  infosProfile: {
+    first_name: string;
+    last_name: string;
+    email: string;
+    } = {
+    first_name: '',
+    last_name: '',
+    email: '',
+  };
   email: string | undefined;
   password = '';
   success: string | undefined;
@@ -58,18 +66,6 @@ export class ProfileHomeComponent implements OnInit {
         window.location.reload();
       });
   }
-
-  // updatePassword(password: string) {
-  //     return this._angularFireAuth.currentUser.then((user) => {
-  //         user.updatePassword(password).then(() => {
-  //             this.store.dispatch(authActions.logOut());
-  //             this._router.navigate(['/auth']);
-  //             console.log('Password updated');
-  //         }).catch((error) => {
-  //             console.log(error);
-  //         });
-  //     });
-  // }
 
   updatePassword2(newPassword: string) {
     const auth = getAuth();

@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { getAuth } from '@angular/fire/auth';
 import { DataStorageService } from 'src/app/services/data-storage/data-storage.service';
 import { IFavori } from '../../../interfaces/favori';
+import {faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'web-mobile-tp-movies-profile-favorites',
@@ -11,6 +12,8 @@ import { IFavori } from '../../../interfaces/favori';
   styleUrls: ['./profile-favorites.component.scss'],
 })
 export class ProfileFavoritesComponent implements OnInit {
+
+  faDelete = faTrashAlt;
   authUser = getAuth().currentUser;
   listFavoris: IFavori[] = this._dataStorageService.getFavorites(
     this.authUser?.email
@@ -27,5 +30,10 @@ export class ProfileFavoritesComponent implements OnInit {
       .subscribe(() => {
         const authUser = getAuth().currentUser;
       });
+  }
+  deleteFavorite(id: number): void {
+    this.listFavoris =
+        this._dataStorageService.getFavorites(this.authUser?.email);
+    this._dataStorageService.deleteFavorite(this.authUser?.email, id);
   }
 }

@@ -82,12 +82,23 @@ export class TmdbService {
     );
   }
 
+  getTopRatedMovies(page: number): Observable<any> {
+    return this.httpClient.get(
+      `${this._BASE_URL}/movie/top_rated?api_key=${this._API_KEY}&page=${page}&language=fr-FR&region=FR`
+    );
+  }
+
   movie(id: number): Observable<IMovie> {
     return this.httpClient.get<IMovie>(
       `${this._BASE_URL}/movie/${id}?api_key=${this._API_KEY}&language=fr-FR&region=FR`
     );
   }
 
+  searchMovie(searchStr: string, page: number): Observable<any> {
+    return this.httpClient.get(
+      `${this._BASE_URL}/search/movie?api_key=${this._API_KEY}&page=${page}&query=${searchStr}`
+    );
+  }
   discoverTvShow(
     params: Record<string, string>
   ): Observable<IDiscoverPageContent<ITvSerie>> {

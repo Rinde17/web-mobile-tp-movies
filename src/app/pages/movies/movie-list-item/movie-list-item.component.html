@@ -1,7 +1,7 @@
 <div *ngIf="movie" class="card" (click)="redirect()">
     <img class="card-img-top" src="https://image.tmdb.org/t/p/w220_and_h330_face/{{ movie.poster_path }}"
-         
-         alt="{{ movie.title }}" appImgFallback />
+
+         alt="{{ movie.title }}" appImgFallback/>
     <div class="d-flex options">
         <i>
             <fa-icon [icon]="faList" (click)="addToWatchlist(); $event.stopPropagation()"></fa-icon>
