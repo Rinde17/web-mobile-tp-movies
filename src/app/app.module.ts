@@ -17,6 +17,7 @@ import { AuthEffects } from './pages/auth/auth-store/auth.effects';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -27,6 +28,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
     ButtonsModule.forRoot(),
@@ -37,6 +39,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
       logOnly: environment.production,
     }),
     EffectsModule.forRoot([AuthEffects]),
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
