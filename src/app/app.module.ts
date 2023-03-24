@@ -16,6 +16,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AuthEffects } from './pages/auth/auth-store/auth.effects';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routes';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -26,6 +27,7 @@ import { appRoutes } from './app.routes';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
     ButtonsModule.forRoot(),
     AlertModule.forRoot(),
@@ -35,6 +37,7 @@ import { appRoutes } from './app.routes';
       logOnly: environment.production,
     }),
     EffectsModule.forRoot([AuthEffects]),
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

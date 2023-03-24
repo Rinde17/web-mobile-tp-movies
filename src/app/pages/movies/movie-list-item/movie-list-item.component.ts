@@ -15,6 +15,7 @@ import { Subject } from 'rxjs';
 })
 export class MovieListItemComponent implements OnInit {
   @Input() movie: IMovie;
+  @Input() public currentRating: number;
   @Output() addedToWatchlist = new EventEmitter<IMovie>();
   @Output() addedToFavorite = new EventEmitter<IMovie>();
 
@@ -30,6 +31,7 @@ export class MovieListItemComponent implements OnInit {
     this._authService.userState
       .pipe(takeUntil(this.destroyed$))
       .subscribe((response) => (this.currentUser = response));
+    this.currentRating = this.movie.vote_average;
   }
 
   redirect(): void {
