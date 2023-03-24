@@ -13,5 +13,6 @@
         <h5 class="card-title">{{ movie.title }}</h5>
         <p class="card-text">{{ movie.release_date }}</p>
         <ngb-rating [max]="5" [(rate)]="currentRating" readonly="true"></ngb-rating>
+        <h5>{{ currentRating }}</h5>
     </div>
 </div>

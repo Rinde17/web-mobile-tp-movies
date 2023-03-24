@@ -3,6 +3,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { MoviesRoutingModule } from './movies-routing.module';
 import { MovieListComponent } from './movie-list/movie-list.component';
@@ -22,6 +23,7 @@ import { DatePipe } from '@angular/common';
     MoviesRoutingModule,
     SharedModule,
     FontAwesomeModule,
+    NgbModule,
     StoreModule.forFeature(
       movieState.moviesStateFeatureKey,
       movieState.reducers
