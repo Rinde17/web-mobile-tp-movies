@@ -29,7 +29,10 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this._authService.userState
       .pipe(takeUntil(this.destroyed$))
-      .subscribe((response) => (this.user = response));
+      .subscribe((response) => {
+        console.log(response);
+        this.user = response;
+      });
   }
 
   logOut(): void {

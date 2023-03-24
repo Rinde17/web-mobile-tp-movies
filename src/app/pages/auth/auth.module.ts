@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as authState from './auth-store';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { WebcamModule } from 'ngx-webcam';
 
 @NgModule({
   declarations: [AuthComponent],
@@ -24,6 +25,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
     StoreModule.forFeature(authState.authStateFeatureKey, authState.reducers),
     EffectsModule.forFeature([AuthEffects]),
     ButtonsModule.forRoot(),
+    WebcamModule,
   ],
 })
 export class AuthModule {}
