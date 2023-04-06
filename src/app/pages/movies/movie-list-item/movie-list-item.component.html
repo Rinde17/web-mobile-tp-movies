@@ -1,4 +1,4 @@
-<div *ngIf="movie" class="card" (click)="redirect()">
+<div style="width: 220px; height: 440px;" *ngIf="movie" class="card" (click)="redirect()">
     <img class="card-img-top" src="https://image.tmdb.org/t/p/w220_and_h330_face/{{ movie.poster_path }}"
 
          alt="{{ movie.title }}" appImgFallback/>
@@ -12,6 +12,9 @@
     </div>
     <div class="card-body d-flex">
         <h5 class="card-title">{{ movie.title }}</h5>
-        <p class="card-text">{{ movie.release_date }}</p>
+        <div class="d-flex justify-content-between">
+            <p class="card-text">{{ movie.release_date }}</p>
+            <p class="rate"><i class="material-icons">star</i><span>{{movie.vote_average}}</span></p>
+        </div>
     </div>
 </div>

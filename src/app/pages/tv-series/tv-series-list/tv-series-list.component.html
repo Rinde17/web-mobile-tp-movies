@@ -1,5 +1,5 @@
 <div class="container">
-    <div *ngIf="searchResults">
+    <div *ngIf="searchResults && searchString !== ''">
         <h1 class="mt-3">Séries recherchées</h1>
         <div class="d-flex flex-column justify-content-center">
             <div class="d-flex justify-content-center mb-4">
@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-    <div *ngIf="!searchResults">
+    <div *ngIf="!searchResults || searchString === ''">
         <h1 class="mt-3">Séries Populaires</h1>
         <div class="d-flex flex-column justify-content-center">
             <div class="d-flex justify-content-center mb-4">

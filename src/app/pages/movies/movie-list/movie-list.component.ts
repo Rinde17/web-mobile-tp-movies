@@ -27,7 +27,6 @@ export class MovieListComponent implements OnInit {
     searchResults: any;
     searchString = '';
     movies: any;
-    loader = true;
     currentUser: IUser | null = null;
     movies$: Observable<IMovie[]> = this._store.pipe(select(selectMovies));
     errorMessage$: Observable<string> | undefined;
@@ -95,7 +94,7 @@ export class MovieListComponent implements OnInit {
                     if (error) {
                         console.log(error);
                     } else {
-                        console.log('Added to Watchlist');
+                        console.log('Ajouté à la liste des films à voir');
                     }
                 }
             );
@@ -111,7 +110,7 @@ export class MovieListComponent implements OnInit {
                     if (error) {
                         console.log(error);
                     } else {
-                        console.log('Added to Favorites');
+                        console.log('Ajouté à la liste des films favoris');
                     }
                 }
             );

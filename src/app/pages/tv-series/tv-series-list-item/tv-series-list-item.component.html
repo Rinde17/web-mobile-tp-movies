@@ -1,8 +1,7 @@
-<div *ngIf="tvshow" class="card mt-4 ml-4" (click)="redirect()">
-    <img class="card-img-top"
+<div style="width: 220px; height: 440px;"  *ngIf="tvshow" class="card mt-4 ml-4" (click)="redirect()">
+    <img  class="card-img-top"
             src="https://image.tmdb.org/t/p/w220_and_h330_face/{{ tvshow.poster_path }}"
-            alt="{{ tvshow.name }}"
-            appImgFallback
+            alt="{{ tvshow.name }}" appImgFallback
     />
     <div class="d-flex options">
         <i>
@@ -14,6 +13,9 @@
     </div>
     <div class="card-body d-flex">
         <h5 class="card-title">{{ tvshow.name }}</h5>
-        <p class="card-text">{{ tvshow.first_air_date }}</p>
+        <div class="d-flex justify-content-between">
+            <p class="card-text">{{ tvshow.first_air_date }}</p>
+            <p class="rate"><i class="material-icons">star</i><span>{{tvshow.vote_average}}</span></p>
+        </div>
     </div>
 </div>
