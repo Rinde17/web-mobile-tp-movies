@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
         this.destroyed$.complete();
     }
 
-    getInfos(email: string | null | undefined) {
+    getInfos(email: string | null ) {
         return this._authService.getInfos(email);
     }
 }
