@@ -39,11 +39,11 @@
 <!--                        </div>-->
 <!--                    </h2>-->
                     <h2>
-                        <span *ngIf="movie.genres.length <= 1"> Genre : </span>
-                        <span *ngIf="movie.genres.length > 1"> Genres : </span>
-                        <div *ngFor="let genre of movie.genres; last as isLast">
+                        <span *ngIf="movie.genres.length <= 1"> Genre : </span> <br>
+                        <span *ngIf="movie.genres.length > 1"> Genres : </span> <br>
+                        <div *ngFor="let genre of movie.genres; last as isLast" class="genres">
                                 <span *ngIf="isLast === false">
-                                    {{genre.name}},
+                                    {{genre.name}},&nbsp;
                                 </span>
                             <span *ngIf="isLast">
                                     {{genre.name}}
@@ -60,7 +60,7 @@
     <div>
         <h2 class="cast-title">Casting :</h2>
         <div class="d-flex flew-row overflow-auto cast-slider">
-            <div *ngFor="let actor of movieCredits.cast" class="container d-flex flex-column actor-case" (click)="redirect(actor.id)">
+            <div *ngFor="let actor of movieCredits?.cast" class="container d-flex flex-column actor-case" (click)="redirect(actor.id)">
                 <img class="actor-image"
                      src="https://image.tmdb.org/t/p/w220_and_h330_face/{{ actor.profile_path }}"
                      alt="{{ actor.name }}"

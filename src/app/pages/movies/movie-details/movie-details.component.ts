@@ -10,6 +10,7 @@ import { TmdbService } from 'src/app/services/tmdb/tmdb.service';
 })
 export class MovieDetailsComponent implements OnInit {
   movie: IMovie | undefined;
+  movieCredits: IMovieCredits | undefined;
   routeParameterId: number;
 
   constructor(
