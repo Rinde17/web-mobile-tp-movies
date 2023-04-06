@@ -10,6 +10,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { TvSeriesEffects } from './tv-series-store/tv-series.effects';
 import { tvShowsDetailsStateFeatureKey } from './tv-series-store';
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
@@ -17,18 +19,20 @@ import { tvShowsDetailsStateFeatureKey } from './tv-series-store';
     TvSeriesListItemComponent,
     TvSeriesDetailsComponent,
   ],
-  imports: [
-    TvSeriesRoutingModule,
-    SharedModule,
-    StoreModule.forFeature(
-      tvShowState.tvShowsStateFeatureKey,
-      tvShowState.reducers
-    ),
-    StoreModule.forFeature(
-      tvShowState.tvShowsDetailsStateFeatureKey,
-      tvShowState.tvShowDetailsReducer
-    ),
-    EffectsModule.forFeature([TvSeriesEffects]),
-  ],
+    imports: [
+        TvSeriesRoutingModule,
+        SharedModule,
+        StoreModule.forFeature(
+            tvShowState.tvShowsStateFeatureKey,
+            tvShowState.reducers
+        ),
+        StoreModule.forFeature(
+            tvShowState.tvShowsDetailsStateFeatureKey,
+            tvShowState.tvShowDetailsReducer
+        ),
+        EffectsModule.forFeature([TvSeriesEffects]),
+        FontAwesomeModule,
+        MatPaginatorModule,
+    ],
 })
 export class TvSeriesModule {}

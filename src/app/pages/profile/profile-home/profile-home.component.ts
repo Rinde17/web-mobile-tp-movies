@@ -47,9 +47,7 @@ export class ProfileHomeComponent implements OnInit {
       .pipe(takeUntil(this.destroyed$))
       .subscribe(() => {
         const authUser = getAuth().currentUser;
-        if (authUser) {
-          this.infosProfile = this._authService.getInfos(authUser.email);
-        }
+          this.infosProfile = this._authService.getInfos(authUser?.email);
       });
   }
 

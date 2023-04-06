@@ -151,7 +151,7 @@ export class AuthService {
       });
   }
 
-  getInfos(userEmail: string | null) {
+  getInfos(userEmail: string | null | undefined) {
     const infosProfile = {
       email: '',
       last_name: '',

@@ -15,7 +15,15 @@ import * as authActions from './pages/auth/auth-store/auth.actions';
 })
 export class AppComponent implements OnInit {
     isShown = false;
-    infosProfile: { uid: string; url_picture: string; last_name: string; first_name: string; email: string; } | undefined;
+    infosProfile: {
+        first_name: string;
+        last_name: string;
+        email: string;
+    } = {
+        first_name: '',
+        last_name: '',
+        email: '',
+    };
     destroyed$: Subject<boolean> = new Subject<boolean>();
     user: IUser | null = null;
 
@@ -37,6 +45,7 @@ export class AppComponent implements OnInit {
       .subscribe((response) => {
         console.log(response);
         this.user = response;
+        this.infosProfile = this._authService.getInfos(response?.email);
       });
   }
 
@@ -51,9 +60,5 @@ export class AppComponent implements OnInit {
     ngOnDestroy(): void {
         this.destroyed$.next(true);
         this.destroyed$.complete();
-    }
-
-    getInfos(email: string | null ) {
-        return this._authService.getInfos(email);
     }
 }

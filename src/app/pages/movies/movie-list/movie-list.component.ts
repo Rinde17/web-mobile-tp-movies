@@ -129,7 +129,6 @@ export class MovieListComponent implements OnInit {
             this.length = data.total_results;
         });
     }
-
     getTopRatedMovies(page: number): void {
         this._tmdbService.getTopRatedMovies(page).pipe(delay(2000)).subscribe((data: any) => {
                 this.movies = data.results;
@@ -137,20 +136,8 @@ export class MovieListComponent implements OnInit {
             }
         );
     }
-
-    changePage(event: { pageIndex: number; }) {
-        this.getTopRatedMovies(event.pageIndex + 1)
-    }
-
     changePageSearch(event: { pageIndex: number; }) {
         this.searchMovies(event.pageIndex + 1)
     }
 
-    isFavorite(movie: number): void {
-        if (this.currentUser && this.currentUser?.email) {
-            return this._dataStorageService.isFavorite(
-                this.currentUser?.email, movie
-            );
-        }
-    }
 }

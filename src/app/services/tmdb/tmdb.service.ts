@@ -88,6 +88,17 @@ export class TmdbService {
     );
   }
 
+  getTopRatedTvShows(page: number): Observable<any> {
+    return this.httpClient.get(
+      `${this._BASE_URL}/tv/top_rated?api_key=${this._API_KEY}&page=${page}&language=fr-FR&region=FR`
+    );
+  }
+
+  searchTvShow(searchStr: string, page: number): Observable<any> {
+    return this.httpClient.get(
+      `${this._BASE_URL}/search/tv?api_key=${this._API_KEY}&page=${page}&query=${searchStr}`
+    );
+  }
   movie(id: number): Observable<IMovie> {
     return this.httpClient.get<IMovie>(
       `${this._BASE_URL}/movie/${id}?api_key=${this._API_KEY}&language=fr-FR&region=FR`
