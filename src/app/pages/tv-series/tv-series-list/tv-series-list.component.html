@@ -39,7 +39,8 @@
             <div class="container-fluid justify-content-center tv-series-list mb-3">
                 <web-mobile-tp-movies-tv-series-list-item
                         *ngFor="let tvshow of tvseries$ | async | searchTextFilter: searchText: 'name'"
-                        [tvshow]="tvshow">
+                        [tvshow]="tvshow" (addedToWatchlist)="addToWatchlist($event)"
+                        (addedToFavorite)="addToFavorites($event)">
                 </web-mobile-tp-movies-tv-series-list-item>
             </div>
         </div>

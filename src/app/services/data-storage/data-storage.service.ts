@@ -126,6 +126,20 @@ export class DataStorageService {
         );
     }
 
+    deleteWatchList(userEmail: string | null | undefined, id: number) {
+        this.angularFirestore
+            .collection(`Users/${userEmail}/watchlist`)
+            .doc(`${id}`)
+            .delete()
+            .then(() => {
+                console.log('Document successfully deleted!');
+            }).catch((error) => {
+                console.error('Error removing document: ', error);
+
+            }
+        );
+    }
+
     isFavorite(userEmail: string | undefined, id: number) {
         this.angularFirestore
             .collection(`Users/${userEmail}/favorite`)

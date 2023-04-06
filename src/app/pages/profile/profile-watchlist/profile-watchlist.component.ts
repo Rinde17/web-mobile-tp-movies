@@ -5,6 +5,7 @@ import { DataStorageService } from '../../../services/data-storage/data-storage.
 import { takeUntil } from 'rxjs/operators';
 import { getAuth } from '@angular/fire/auth';
 import { IWatchList } from '../../../interfaces/watchlist';
+import {faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'web-mobile-tp-movies-profile-watchlist',
@@ -12,6 +13,8 @@ import { IWatchList } from '../../../interfaces/watchlist';
   styleUrls: ['./profile-watchlist.component.scss'],
 })
 export class ProfileWatchlistComponent {
+
+  faDelete = faTrashAlt;
   authUser = getAuth().currentUser;
   watchList: IWatchList[] = this._dataStorageService.getWatchList(
     this.authUser?.email
@@ -29,4 +32,12 @@ export class ProfileWatchlistComponent {
         const authUser = getAuth().currentUser;
       });
   }
+
+  deleteWatchlist(id: number): void {
+    this.watchList =
+        this._dataStorageService.getWatchList(this.authUser?.email);
+    this._dataStorageService.deleteWatchList(this.authUser?.email, id);
+  }
+
+  protected readonly faTrashAlt = faTrashAlt;
 }
