@@ -1,27 +1,90 @@
-<div *ngIf="movies">
+<div *ngIf="movie">
     <div
             class="header"
             [style.background-image]="
       'url(https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/' +
-      movies.backdrop_path +
+      movie.backdrop_path +
       ')'
     "
     >
         <div class="custom-background">
-            <div class="container d-flex">
-                <img
-                        src="https://image.tmdb.org/t/p/w220_and_h330_face/{{movies.poster_path}}"
-                        alt="{{ movies.title }}"
-                        appImgFallback
+            <div style="padding: 0px" class="container d-flex">
+                <img class="cover-image"
+                     src="https://image.tmdb.org/t/p/w220_and_h330_face/{{movie.poster_path}}"
+                     alt="{{ movie.title }}"
+                     appImgFallback
                 />
                 <div class="d-flex flex-column movie-details">
-                    <h1>{{ movies.title }} ({{ movies.release_date | date: "y" }})</h1>
-                    <h2> Note : {{ movies.vote_average }}</h2>
-                    <p> Overview : {{ movies.overview }}</p>
-                    <h2> Popularity : {{ movies.popularity }}</h2>
-                    <h2> Nombre de vote : {{ movies.vote_count }}</h2>
+                    <h1>{{ movie.title }} ({{ movie.release_date | date: "y" }})</h1>
+<!--                    <h3>-->
+<!--                        <span>De </span>-->
+<!--                        <span *ngFor="let user of movie.created_by; last as isLast">-->
+<!--                                <span *ngIf="isLast === false"> {{user.name}},</span>-->
+<!--                                <span *ngIf="isLast"> {{user.name}} </span>-->
+<!--                            </span>-->
+<!--                    </h3>-->
+                    <h2> {{ movie.vote_average | number:'0.0-1' }} / 10
+                        <h3> ({{ movie.vote_count }} votes) </h3>
+                    </h2>
+<!--                    <h2>-->
+<!--                        <span *ngIf="movie.number_of_seasons <= 1"> {{ movie.number_of_seasons }} saison, disponible sur : </span>-->
+<!--                        <span *ngIf="movie.number_of_seasons > 1"> {{ movie.number_of_seasons }} saisons, disponibles sur : </span>-->
+<!--                        <div *ngFor="let network of movie.networks; last as isLast">-->
+<!--                                <span *ngIf="isLast === false">-->
+<!--                                    {{network.name}}-->
+<!--                                </span>-->
+<!--                            <span *ngIf="isLast">-->
+<!--                                    {{network.name}}-->
+<!--                                </span>-->
+<!--                        </div>-->
+<!--                    </h2>-->
+                    <h2>
+                        <span *ngIf="movie.genres.length <= 1"> Genre : </span> <br>
+                        <span *ngIf="movie.genres.length > 1"> Genres : </span> <br>
+                        <div *ngFor="let genre of movie.genres; last as isLast" class="genres">
+                                <span *ngIf="isLast === false">
+                                    {{genre.name}},&nbsp;
+                                </span>
+                            <span *ngIf="isLast">
+                                    {{genre.name}}
+                                </span>
+                        </div>
+                    </h2>
                 </div>
+            </div>
+            <div class="movie-details">
+                <p> <span class="title">Overview</span> : {{ movie.overview }}</p>
             </div>
         </div>
     </div>
+    <div>
+        <h2 class="cast-title">Casting :</h2>
+        <div class="d-flex flew-row overflow-auto cast-slider">
+            <div *ngFor="let actor of movieCredits?.cast" class="container d-flex flex-column actor-case" (click)="redirect(actor.id)">
+                <img class="actor-image"
+                     src="https://image.tmdb.org/t/p/w220_and_h330_face/{{ actor.profile_path }}"
+                     alt="{{ actor.name }}"
+                     appImgFallback
+                />
+                <span class="actor-details">{{ actor.name }}</span>
+            </div>
+        </div>
+    </div>
+<!--        <div class="custom-background">-->
+<!--            <div class="container d-flex">-->
+<!--                <img-->
+<!--                        src="https://image.tmdb.org/t/p/w220_and_h330_face/{{movie.poster_path}}"-->
+<!--                        alt="{{ movie.title }}"-->
+<!--                        appImgFallback-->
+<!--                />-->
+<!--                <div class="d-flex flex-column movie-details">-->
+<!--                    <h1>{{ movie.title }} ({{ movie.release_date | date: "y" }})</h1>-->
+<!--                    <h2> Note : {{ movie.vote_average }}</h2>-->
+<!--                    <p> Overview : {{ movie.overview }}</p>-->
+<!--                    <h2> Popularity : {{ movie.popularity }}</h2>-->
+<!--                    <h2> Nombre de vote : {{ movie.vote_count }}</h2>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 </div>

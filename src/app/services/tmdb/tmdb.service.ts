@@ -5,12 +5,11 @@ import {
   IPersonCombinedCreditsResponse,
 } from 'src/app/interfaces/response';
 import { Observable } from 'rxjs';
-import { IMovie } from 'src/app/interfaces/movie';
+import { IMovie, IMovieCredits } from 'src/app/interfaces/movie';
 import { environment } from 'src/environments/environment';
-import { ITvSerie } from 'src/app/interfaces/tvseries';
+import { ITvSerie, ITvCredit } from 'src/app/interfaces/tvseries';
 import { ISelectOption } from 'src/app/interfaces/select-option';
 import { IPersonDetails, IPerson } from 'src/app/interfaces/person';
-import {ITvCredit} from "../../interfaces/tvcredits";
 
 export const TMDB_SORTING_OPTIONS: ISelectOption[] = [
   {
@@ -107,9 +106,16 @@ export class TmdbService {
 
   searchMovie(searchStr: string, page: number): Observable<any> {
     return this.httpClient.get(
-      `${this._BASE_URL}/search/movie?api_key=${this._API_KEY}&page=${page}&query=${searchStr}`
+        `${this._BASE_URL}/search/movie?api_key=${this._API_KEY}&page=${page}&query=${searchStr}`
     );
   }
+
+  movieCredits(id: number): Observable<IMovieCredits> {
+    return this.httpClient.get<IMovieCredits>(
+        `${this._BASE_URL}/movie/${id}/credits?api_key=${this._API_KEY}&language=fr-FR&region=FR`
+    );
+  }
+
   discoverTvShow(
     params: Record<string, string>
   ): Observable<IDiscoverPageContent<ITvSerie>> {

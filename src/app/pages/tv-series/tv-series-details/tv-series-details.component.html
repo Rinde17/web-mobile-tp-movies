@@ -29,9 +29,10 @@
                         <h2>
                             <span *ngIf="tvshow.number_of_seasons <= 1"> {{ tvshow.number_of_seasons }} saison, disponible sur : </span>
                             <span *ngIf="tvshow.number_of_seasons > 1"> {{ tvshow.number_of_seasons }} saisons, disponibles sur : </span>
+                            <br>
                             <div *ngFor="let network of tvshow.networks; last as isLast">
                                 <span *ngIf="isLast === false">
-                                    {{network.name}}
+                                    {{network.name}},&nbsp;
                                 </span>
                                 <span *ngIf="isLast">
                                     {{network.name}}
@@ -41,9 +42,10 @@
                         <h2>
                             <span *ngIf="tvshow.genres.length <= 1"> Genre : </span>
                             <span *ngIf="tvshow.genres.length > 1"> Genres : </span>
-                            <div *ngFor="let genre of tvshow.genres; last as isLast">
+                            <br>
+                            <div *ngFor="let genre of tvshow.genres; last as isLast" class="genres">
                                 <span *ngIf="isLast === false">
-                                    {{genre.name}},
+                                    {{genre.name}},&nbsp;
                                 </span>
                                 <span *ngIf="isLast">
                                     {{genre.name}}
