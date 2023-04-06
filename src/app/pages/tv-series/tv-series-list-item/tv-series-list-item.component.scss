@@ -1,10 +1,19 @@
 .card{
   cursor: pointer;
-  margin: 10px;
 }
 
 .card-body{
-  flex-direction: column;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+}
+
+.options{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  >i{
+    margin: 3px;
+    color:orange;
+  }
 }

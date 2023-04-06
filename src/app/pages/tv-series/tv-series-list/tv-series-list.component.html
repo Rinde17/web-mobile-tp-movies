@@ -1,22 +1,48 @@
 <div class="container">
-    <h1 class="mt-3">Séries Populaires</h1>
-    <div class="d-flex flex-column justify-content-center">
-        <div class="d-flex justify-content-center mb-4">
-            <input class="form-control col-6" placeholder="Rechercher..." [(ngModel)]="searchText"/>
+    <div *ngIf="searchResults && searchString !== ''">
+        <h1 class="mt-3">Séries recherchées</h1>
+        <div class="d-flex flex-column justify-content-center">
+            <div class="d-flex justify-content-center mb-4">
+                <input class="form-control col-6" placeholder="Rechercher..." [(ngModel)]="searchString"
+                       name="searchString" (keyup.enter)="searchTvShows(1)"/>
+                <button class="btn btn-primary ml-2" (click)="searchTvShows(1)">Rechercher</button>
+            </div>
         </div>
-        <div>
-            <web-mobile-tp-movies-app-filters (genreChanged)="onGenreChanged($event)"
-                                              (yearsChanged)="onYearChanged($event)"
-                                              (sortByChanged)="onSortByChanged($event)">
-            </web-mobile-tp-movies-app-filters>
+        <div class="d-flex">
+            <div class="container-fluid justify-content-center tv-series-list mb-3">
+                <web-mobile-tp-movies-tv-series-list-item
+                        *ngFor="let tvshow of searchResults"
+                        [tvshow]="tvshow" (addedToWatchlist)="addToWatchlist($event)"
+                        (addedToFavorite)="addToFavorites($event)"
+                >
+                </web-mobile-tp-movies-tv-series-list-item>
+                <mat-paginator [length]="length" [pageSize]="20" (page)="changePageSearch($event)"></mat-paginator>
+            </div>
         </div>
     </div>
-    <div class="d-flex">
-        <div class="container-fluid justify-content-center tv-series-list mb-3">
-            <web-mobile-tp-movies-tv-series-list-item
-                    *ngFor="let tvshow of tvseries$ | async | searchTextFilter: searchText: 'name'"
-                    [tvshow]="tvshow">
-            </web-mobile-tp-movies-tv-series-list-item>
+    <div *ngIf="!searchResults || searchString === ''">
+        <h1 class="mt-3">Séries Populaires</h1>
+        <div class="d-flex flex-column justify-content-center">
+            <div class="d-flex justify-content-center mb-4">
+                <input class="form-control col-6" placeholder="Rechercher..." [(ngModel)]="searchString"
+                       name="searchString" (keyup.enter)="searchTvShows(1)"/>
+                <button class="btn btn-primary ml-2" (click)="searchTvShows(1)">Rechercher</button>
+            </div>
+            <div>
+                <web-mobile-tp-movies-app-filters (genreChanged)="onGenreChanged($event)"
+                                                  (yearsChanged)="onYearChanged($event)"
+                                                  (sortByChanged)="onSortByChanged($event)">
+                </web-mobile-tp-movies-app-filters>
+            </div>
+        </div>
+        <div class="d-flex">
+            <div class="container-fluid justify-content-center tv-series-list mb-3">
+                <web-mobile-tp-movies-tv-series-list-item
+                        *ngFor="let tvshow of tvseries$ | async | searchTextFilter: searchText: 'name'"
+                        [tvshow]="tvshow" (addedToWatchlist)="addToWatchlist($event)"
+                        (addedToFavorite)="addToFavorites($event)">
+                </web-mobile-tp-movies-tv-series-list-item>
+            </div>
         </div>
     </div>
 </div>

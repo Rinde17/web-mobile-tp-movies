@@ -18,6 +18,13 @@
                         <div class="text-center w-100" *ngIf="watch.isWatched === false; else elseBlock">Pas encore vu</div>
                         <ng-template class="text-center w-100" #elseBlock>Vous l'avez vu</ng-template>
                     </div>
+                    <div class="text-center">
+                        <button class="btn btn-danger my-0" (click)="deleteWatchlist(watch.id)" style="padding: 0 6px 0 6px">
+                            <i>
+                                <fa-icon [icon]="faDelete" style="font-size: 15px"></fa-icon>
+                            </i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
