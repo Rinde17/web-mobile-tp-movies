@@ -16,6 +16,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AuthEffects } from './pages/auth/auth-store/auth.effects';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routes';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 

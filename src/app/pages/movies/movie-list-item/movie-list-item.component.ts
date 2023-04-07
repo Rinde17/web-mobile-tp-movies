@@ -15,41 +15,40 @@ import {DataStorageService} from "../../../services/data-storage/data-storage.se
     styleUrls: ['./movie-list-item.component.scss'],
 })
 export class MovieListItemComponent implements OnInit {
-    @Input() movie: IMovie | undefined;
-    @Output() addedToWatchlist = new EventEmitter<IMovie>();
-    @Output() addedToFavorite = new EventEmitter<IMovie>();
-    faList = faList;
-    faHeart = faHeart;
-    currentUser: IUser | null = null;
+  @Input() movie: IMovie;
+  @Input() public currentRating: number;
+  @Output() addedToWatchlist = new EventEmitter<IMovie>();
+  @Output() addedToFavorite = new EventEmitter<IMovie>();
 
-    destroyed$: Subject<boolean> = new Subject<boolean>();
+  faList = faList;
+  faHeart = faHeart;
+  currentUser: IUser;
 
-    constructor(private _router: Router, private _authService: AuthService, private _dataStorageService: DataStorageService,
-    ) {
-    }
+  destroyed$: Subject<boolean> = new Subject<boolean>();
 
-    ngOnInit() {
-        this._authService.userState
-            .pipe(takeUntil(this.destroyed$))
-            .subscribe((response) => (this.currentUser = response));
-    }
+  constructor(private _router: Router, private _authService: AuthService) {}
 
-    redirect(): void {
-        if (this.movie) {
-            this._router.navigate(['/movies', this.movie.id]);
-        }
-    }
+  ngOnInit() {
+    this._authService.userState
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((response) => (this.currentUser = response));
+    this.currentRating = this.movie.vote_average;
+  }
 
-    addToWatchlist(): void {
-        this.addedToWatchlist.emit(this.movie);
-    }
+  redirect(): void {
+    this._router.navigate(['/movies', this.movie.id]);
+  }
 
-    addToFavorite(): void {
-        this.addedToFavorite.emit(this.movie);
-    }
+  addToWatchlist(): void {
+    this.addedToWatchlist.emit(this.movie);
+  }
 
-    ngOnDestroy(): void {
-        this.destroyed$.next(true);
-        this.destroyed$.complete();
-    }
+  addToFavorite(): void {
+    this.addedToFavorite.emit(this.movie);
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
+  }
 }
