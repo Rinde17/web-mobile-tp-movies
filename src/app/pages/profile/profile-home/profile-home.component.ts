@@ -8,6 +8,7 @@ import * as authActions from '../../auth/auth-store/auth.actions';
 import { Store } from '@ngrx/store';
 import { IAuthState } from '../../auth/auth-store';
 import { Router } from '@angular/router';
+import { IUser } from '../../../interfaces/user';
 
 @Component({
   selector: 'web-mobile-tp-movies-profile-home',
@@ -19,11 +20,13 @@ export class ProfileHomeComponent implements OnInit {
     first_name: string;
     last_name: string;
     email: string;
-    } = {
+  } = {
     first_name: '',
     last_name: '',
     email: '',
   };
+
+  user: IUser | null | undefined;
   email: string | undefined;
   password = '';
   success: string | undefined;
@@ -45,9 +48,9 @@ export class ProfileHomeComponent implements OnInit {
   ngOnInit(): void {
     this._authService.userState
       .pipe(takeUntil(this.destroyed$))
-      .subscribe(() => {
-        const authUser = getAuth().currentUser;
-          this.infosProfile = this._authService.getInfos(authUser?.email);
+      .subscribe((response) => {
+        this.user = response;
+        this.infosProfile = this._authService.getInfos(response?.email);
       });
   }
 
